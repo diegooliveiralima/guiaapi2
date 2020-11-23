@@ -267,9 +267,9 @@ def enviarLivroPDF(id, repeticao):
 
     banco = mysql.connector.connect (
         host="us-cdbr-east-02.cleardb.com",
-        user="b4e452b4130136",
-        passwd="af8470ef",
-        database="heroku_74d04aefdaec444"
+        user="b64ccbb6c5e3c0",
+        passwd="1569cc14",
+        database="heroku_3d387bc54c19158"
         )
 
 
@@ -395,9 +395,9 @@ def enviarLivro(myurl, id, repeticao):
 
     banco = mysql.connector.connect (
             host="us-cdbr-east-02.cleardb.com",
-            user="b4e452b4130136",
-            passwd="af8470ef",
-            database="heroku_74d04aefdaec444"
+            user="b64ccbb6c5e3c0",
+            passwd="1569cc14",
+            database="heroku_3d387bc54c19158"
         )
 
 
@@ -571,9 +571,9 @@ def handler():
 
     banco = mysql.connector.connect (
         host="us-cdbr-east-02.cleardb.com",
-        user="b4e452b4130136",
-        passwd="af8470ef",
-        database="heroku_74d04aefdaec444"
+        user="b64ccbb6c5e3c0",
+        passwd="1569cc14",
+        database="heroku_3d387bc54c19158"
     )
     #---------------------------------------------- Verificar ofensiva dos livros ------------------- 
     '''
@@ -762,9 +762,9 @@ def handler():
 
         banco = mysql.connector.connect (
             host="us-cdbr-east-02.cleardb.com",
-            user="b4e452b4130136",
-            passwd="af8470ef",
-            database="heroku_74d04aefdaec444"
+            user="b64ccbb6c5e3c0",
+            passwd="1569cc14",
+            database="heroku_3d387bc54c19158"
         )
 
         testador = re.sub('’', '', testador)
@@ -830,9 +830,9 @@ def handler():
 
     banco = mysql.connector.connect (
         host="us-cdbr-east-02.cleardb.com",
-        user="b4e452b4130136",
-        passwd="af8470ef",
-        database="heroku_74d04aefdaec444"
+        user="b64ccbb6c5e3c0",
+        passwd="1569cc14",
+        database="heroku_3d387bc54c19158"
     )
     
     soup = BeautifulSoup(req.content, 'html.parser')
@@ -863,9 +863,9 @@ def procurarFilmes(testador):
     req = requests.get(url)
     banco = mysql.connector.connect (
         host="us-cdbr-east-02.cleardb.com",
-        user="b4e452b4130136",
-        passwd="af8470ef",
-        database="heroku_74d04aefdaec444"
+        user="b64ccbb6c5e3c0",
+        passwd="1569cc14",
+        database="heroku_3d387bc54c19158"
     )
     #Encontra filmes dentro de uma lista de filmes do blog pitada cult
     soup = BeautifulSoup(req.content, 'html.parser')
@@ -1027,9 +1027,9 @@ def enviarFilme(x, y, z):
         except:
             banco = mysql.connector.connect (
             host="us-cdbr-east-02.cleardb.com",
-            user="b4e452b4130136",
-            passwd="af8470ef",
-            database="heroku_74d04aefdaec444"
+            user="b64ccbb6c5e3c0",
+            passwd="1569cc14",
+            database="heroku_3d387bc54c19158"
             )
             print("Não encontrou nenhum titulo")
             #filme não existe, cadastra no banco para na proxima vez nao procurar mais por ele
@@ -1269,9 +1269,9 @@ def enviarFilme(x, y, z):
 
         banco = mysql.connector.connect (
             host="us-cdbr-east-02.cleardb.com",
-            user="b4e452b4130136",
-            passwd="af8470ef",
-            database="heroku_74d04aefdaec444"
+            user="b64ccbb6c5e3c0",
+            passwd="1569cc14",
+            database="heroku_3d387bc54c19158"
         )
 
         testador = nomeIngles.replace("\t", "")
@@ -1329,9 +1329,9 @@ def enviarFilme(x, y, z):
 
         banco = mysql.connector.connect (
             host="us-cdbr-east-02.cleardb.com",
-            user="b4e452b4130136",
-            passwd="af8470ef",
-            database="heroku_74d04aefdaec444"
+            user="b64ccbb6c5e3c0",
+            passwd="1569cc14",
+            database="heroku_3d387bc54c19158"
         )
 
         testador = nomeIngles.replace("\t", "")
