@@ -1258,7 +1258,7 @@ def enviarFilme(x, y, z):
             genero = genero + " Curta"
     '''
     
-    if NotaIMDB <= '5.0' or n or (fonte == 'Top 10 do site torrentfreak' and NotaIMDB <= '6.0') or (fonte == 'Usuários do Letterbox' and year < 2019)  or (fonte == 'LegendasTv' and year < 2019) or (numeroCriticas < 10 and votosQuantidade < 700) or year == 0:
+    if NotaIMDB <= '5.0' or n or (fonte == 'Top 10 do site torrentfreak' and NotaIMDB <= '6.0') or (fonte == 'Usuários do Letterbox' and year < 2019)  or (fonte == 'LegendasTv' and year < 2019) or (numeroCriticas < 15 and votosQuantidade < 700 and NotaIMDB <= '6.0' ) or year == 0:
         print("filme não passou no critério, um dos requisitos abaixos não foi suprido:")
         print("Nota é " + NotaIMDB)
         print("Genero é ")
