@@ -1292,6 +1292,7 @@ def enviarFilme(x, y, z):
         print ("number of affected rows: {}".format(row_count))
         if row_count <= 0:
             cursor = banco.cursor()
+            votosQuantidade = str(votosQuantidade)
             comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade) values ('" + testador + " - " + query + "', '" + fonte + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "')"
             cursor.execute(comando)
             banco.commit() 
@@ -1348,6 +1349,7 @@ def enviarFilme(x, y, z):
 
 
         cursor = banco.cursor()
+        votosQuantidade = str(votosQuantidade)
         comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade) values ('" + testador + " - " + query +  "', '" + fonte + "', '" + hora + "' , '" + estado + "' , '" + votosQuantidade +  "')"
         cursor.execute(comando)
         banco.commit() 
