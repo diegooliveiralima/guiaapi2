@@ -604,7 +604,7 @@ def handler():
             f = f + 1
     '''
     
-    users = ("deathproof", "austinburke", "silentdawn", "kurstboy", "justmiaslife", "adrianbalboa", "max_delgado", "cervantes3", "joelollo", "twillis04")
+    users = ("deathproof", "austinburke", "silentdawn", "kurstboy", "justmiaslife", "adrianbalboa", "max_delgado", "cervantes3", "joelollo", "twillis04", "xene")
     
     g = 0
     for number in users:
@@ -1292,7 +1292,7 @@ def enviarFilme(x, y, z):
         print ("number of affected rows: {}".format(row_count))
         if row_count <= 0:
             cursor = banco.cursor()
-            comando = "INSERT INTO filmes (filme, fonte, hora, estado) values ('" + testador + " - " + query + "', '" + fonte + "', '" + hora + "' , '" + estado + "')"
+            comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade) values ('" + testador + " - " + query + "', '" + fonte + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "')"
             cursor.execute(comando)
             banco.commit() 
             imagemUrl = dicionario['Poster']
@@ -1348,7 +1348,7 @@ def enviarFilme(x, y, z):
 
 
         cursor = banco.cursor()
-        comando = "INSERT INTO filmes (filme, fonte, hora, estado) values ('" + testador + " - " + query +  "', '" + fonte + "', '" + hora + "' , '" + estado + "')"
+        comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade) values ('" + testador + " - " + query +  "', '" + fonte + "', '" + hora + "' , '" + estado + "' , '" + votosQuantidade +  "')"
         cursor.execute(comando)
         banco.commit() 
 
