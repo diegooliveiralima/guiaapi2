@@ -643,7 +643,7 @@ def handler():
             
         
             if row_count <= 0:
-                sleep(40); enviarFilme(tituloAno, "", "Usuários do Letterbox") #após verificar se há nova postagem, envia o filme para a função do telegram
+                sleep(20); enviarFilme(tituloAno, "", "Usuários do Letterbox") #após verificar se há nova postagem, envia o filme para a função do telegram
             else:
                 print("### LOG ### - " + users[g] + "  ### - O filme " +  testador + " já está cadastrado")
                 if row_count > 1:
@@ -898,6 +898,7 @@ def enviarFilme(x, y, z):
 
     
     titulo = titulo.replace('"', '')
+    titulo = titulo.replace('#', '')
     titulo = re.sub('&', "", titulo)
     query = titulo
     print("quero é igual a: " + query)
