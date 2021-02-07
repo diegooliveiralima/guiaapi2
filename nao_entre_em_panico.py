@@ -604,7 +604,7 @@ def handler():
             f = f + 1
     '''
     
-    users = ("deathproof", "austinburke", "silentdawn", "kurstboy", "justmiaslife", "adrianbalboa", "max_delgado", "cervantes3", "joelollo", "twillis04", "xene")
+    users = ("deathproof", "austinburke", "silentdawn", "kurstboy", "justmiaslife", "adrianbalboa", "max_delgado", "cervantes3", "joelollo", "twillis04", "xene", "jslk")
     
     g = 0
     for number in users:

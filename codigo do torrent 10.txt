@@ -1,0 +1,36 @@
+
+    url = "http://top10filmes.biz/"
+    req = requests.get(url)
+
+    soup = BeautifulSoup(req.content, 'html.parser')
+    lista_filmes = soup.findAll('div', class_='entry-content') #encontra todas as classes h2 do blog
+    lista_filmes = lista_filmes[2] #pega apenas o segundo pos
+    lista_filmes =  str(lista_filmes.text) #passa para string
+    BeautifulSoup(lista_filmes, 'html.parser').text
+    lista_filmes = re.search(r'Título Original.*', lista_filmes)
+    if lista_filmes:
+        lista_filmes = lista_filmes.group()
+        lista_filmes = re.sub(r'Título Original ', "", lista_filmes)
+        lista_filmes = re.sub(r'Título Original: ', "", lista_filmes)
+        lista_filmes = re.sub('&', "", lista_filmes)
+        
+        lista_filmes = re.sub(r'’', "", lista_filmes)
+        testador= lista_filmes 
+    else:
+        print("ATENÇÃO! Não foi encontrado um post de filme")
+
+   
+    
+    testador = re.sub('’', '', testador)
+    testador = re.sub("'", "", testador)
+    #Inserir no banco --------------------------
+    cursor = banco.cursor()
+    cursor.execute("SELECT filme FROM filmes WHERE filme like '%" + testador +  "%'")
+    results = cursor.fetchall()
+    row_count = cursor.rowcount
+    print ("number of affected rows: {}".format(row_count))
+    if row_count <= 0:
+            
+        enviarFilme(testador, "", "Blog top10filmes") #após verificar se há nova postagem, envia o filme para a função do telegram
+    else:
+        print("### LOG ### - Blog Top10filmes ### - O filme "  + testador + " já está cadastrado")
