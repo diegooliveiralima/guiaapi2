@@ -640,15 +640,19 @@ def handler():
             results = cursor.fetchall()
             row_count = cursor.rowcount
             print ("number of affected rows: {}".format(row_count))
+            
         
             if row_count <= 0:
                 sleep(40); enviarFilme(tituloAno, "", "Usuários do Letterbox") #após verificar se há nova postagem, envia o filme para a função do telegram
             else:
                 print("### LOG ### - " + users[g] + "  ### - O filme " +  testador + " já está cadastrado")
-                cursor = banco.cursor()
-                comando = "UPDATE filmes SET pontos = pontos + 1 WHERE filme = '" + testador +  "'"
-                cursor.execute(comando)
-                banco.commit() 
+                if row_count > 1:
+                    print("Encontrou varios filmes com esse titulo: " + testador + ", portanto não foram adicionados pontos")
+                else:
+                    cursor = banco.cursor()
+                    comando = "UPDATE filmes SET pontos = pontos + 1 WHERE filme like '%" + testador +  "%'"
+                    cursor.execute(comando)
+                    banco.commit() 
 
 
                 
