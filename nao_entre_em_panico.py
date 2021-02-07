@@ -609,7 +609,7 @@ def handler():
     g = 0
     for number in users:
         url = "https://letterboxd.com/" +  users[g]  + "/films/diary/"
-        g = g + 1
+        
         print("prcourando filmes na lista... " + url)
         req = requests.get(url)
         soup = BeautifulSoup(req.content, 'html.parser')
@@ -640,10 +640,12 @@ def handler():
             results = cursor.fetchall()
             row_count = cursor.rowcount
             print ("number of affected rows: {}".format(row_count))
+        
             if row_count <= 0:
                 sleep(40); enviarFilme(tituloAno, "", "Usuários do Letterbox") #após verificar se há nova postagem, envia o filme para a função do telegram
             else:
-                print("### LOG ### - " + users[g] + "  ### - O filme " +  testador + " já está cadastrado")
+                print("### LOG ### - " + users[b] + "  ### - O filme " +  testador + " já está cadastrado")
+        g = g + 1
     
 
 
