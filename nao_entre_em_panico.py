@@ -1295,7 +1295,7 @@ def enviarFilme(x, y, z):
         if row_count <= 0:
             cursor = banco.cursor()
             votosQuantidade = str(votosQuantidade)
-            comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade) values ('" + testador + " - " + query + "', '" + fonte + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "')"
+            comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + testador + " - " + query + "', '" + fonte + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "' , '" + 1 + "')"
             cursor.execute(comando)
             banco.commit() 
             imagemUrl = dicionario['Poster']
@@ -1352,7 +1352,7 @@ def enviarFilme(x, y, z):
 
         cursor = banco.cursor()
         votosQuantidade = str(votosQuantidade)
-        comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade) values ('" + testador + " - " + query +  "', '" + fonte + "', '" + hora + "' , '" + estado + "' , '" + votosQuantidade +  "')"
+        comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + testador + " - " + query +  "', '" + fonte + "', '" + hora + "' , '" + estado + "' , '" + votosQuantidade +   "' , '" + 1 + "')"
         cursor.execute(comando)
         banco.commit() 
 
