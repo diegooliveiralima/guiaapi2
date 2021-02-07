@@ -645,6 +645,14 @@ def handler():
                 sleep(40); enviarFilme(tituloAno, "", "Usuários do Letterbox") #após verificar se há nova postagem, envia o filme para a função do telegram
             else:
                 print("### LOG ### - " + users[g] + "  ### - O filme " +  testador + " já está cadastrado")
+                cursor = banco.cursor()
+                comando = "SET SQL_SAFE_UPDATES = 0; UPDATE filmes SET pontos = pontos + 1 WHERE filme like '%" + testador +  "%'"
+                cursor.execute(comando)
+                banco.commit() 
+
+
+                
+
         g = g + 1
     
 
