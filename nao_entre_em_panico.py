@@ -643,7 +643,7 @@ def handler():
             if row_count <= 0:
                 sleep(40); enviarFilme(tituloAno, "", "Usuários do Letterbox") #após verificar se há nova postagem, envia o filme para a função do telegram
             else:
-                print("### LOG ### - ListbyAustinBurke  ### - O filme " +  testador + " já está cadastrado")
+                print("### LOG ### - " + users[g] + "  ### - O filme " +  testador + " já está cadastrado")
     
 
 
