@@ -646,7 +646,7 @@ def handler():
             else:
                 print("### LOG ### - " + users[g] + "  ### - O filme " +  testador + " já está cadastrado")
                 cursor = banco.cursor()
-                comando = "SET SQL_SAFE_UPDATES = 0; UPDATE filmes SET pontos = pontos + 1 WHERE filme like '%" + testador +  "%'"
+                comando = "UPDATE filmes SET pontos = pontos + 1 WHERE filme like '%" + testador +  "%'"
                 cursor.execute(comando)
                 banco.commit() 
 
