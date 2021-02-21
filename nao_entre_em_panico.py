@@ -573,57 +573,58 @@ def handler():
 
     
 
+    try:
 
-
-    url2 = "http://unilab.edu.br/noticias/category/noticias/feed/"
+        url2 = "http://unilab.edu.br/noticias/category/noticias/feed/"
 
 
   
-    resp = requests.get(url2)
+        resp = requests.get(url2)
 
-    soup = BeautifulSoup(resp.content, features="xml")
+        soup = BeautifulSoup(resp.content, features="xml")
 
-    items = soup.findAll('item')
-    g = 2
-    for item in range(5):
-        item = items[g]
+        items = soup.findAll('item')
+        g = 2
+        for item in range(5):
+            item = items[g]
 
-        print(item.title.text)
-        print(item.link.text)
+            print(item.title.text)
+            print(item.link.text)
 
-        titulo = item.title.text
-        link = item.link.text
+            titulo = item.title.text
+            link = item.link.text
 
-        banco = mysql.connector.connect (
-        host="us-cdbr-east-02.cleardb.com",
-        user="b64ccbb6c5e3c0",
-        passwd="1569cc14",
-        database="heroku_3d387bc54c19158"
-        )
-        cursor = banco.cursor()
-        cursor.execute("SELECT titulo FROM feed WHERE titulo like '%" + titulo +  "%'")
-        results = cursor.fetchall()
-        row_count = cursor.rowcount
-        print ("number of affected rows: {}".format(row_count))
-        if row_count > 0:
-           print("noticia já foi enviada anteriormente")
-        else:
-
+            banco = mysql.connector.connect (
+            host="us-cdbr-east-02.cleardb.com",
+            user="b64ccbb6c5e3c0",
+            passwd="1569cc14",
+            database="heroku_3d387bc54c19158"
+            )
             cursor = banco.cursor()
-            comando = "INSERT INTO feed (titulo, link) values ('" + titulo + "' , '" + link + "')"
-            cursor.execute(comando)
-            banco.commit() 
+            cursor.execute("SELECT titulo FROM feed WHERE titulo like '%" + titulo +  "%'")
+            results = cursor.fetchall()
+            row_count = cursor.rowcount
+            print ("number of affected rows: {}".format(row_count))
+            if row_count > 0:
+               print("noticia já foi enviada anteriormente")
+            else:
 
-            TOKEN = "1564169676:AAFk9GCEcNXIVR7hG5QyqheiG0dSlYDXHxY"
-            bot = telegram.Bot(TOKEN)
-            print("Bot do telegram conectado!")
-            chat_id = "@unilabNoticias"
+                cursor = banco.cursor()
+                comando = "INSERT INTO feed (titulo, link) values ('" + titulo + "' , '" + link + "')"
+                cursor.execute(comando)
+                banco.commit() 
+
+                TOKEN = "1564169676:AAFk9GCEcNXIVR7hG5QyqheiG0dSlYDXHxY"
+                bot = telegram.Bot(TOKEN)
+                print("Bot do telegram conectado!")
+                chat_id = "@unilabNoticias"
          
-            texto = '[' + item.title.text + '](' + link + ') \n \n' '[' + 'Link alternativo' + '](' + 'https://outline.com/' + link + ')' 
-            bot.send_message(chat_id, texto, parse_mode='markdown', disable_web_page_preview=True)
-        g = g - 1
+                texto = '[' + item.title.text + '](' + link + ') \n \n' '[' + 'Link alternativo' + '](' + 'https://outline.com/' + link + ')' 
+                bot.send_message(chat_id, texto, parse_mode='markdown', disable_web_page_preview=True)
+            g = g - 1
 
-
+    except:
+        print("error")
 
 
     banco = mysql.connector.connect (
