@@ -587,7 +587,7 @@ def handler():
         soup = BeautifulSoup(resp.content, features="xml")
 
         items = soup.findAll('item')
-        g = 2
+        g = 4
         for item in range(5):
             item = items[g]
 
