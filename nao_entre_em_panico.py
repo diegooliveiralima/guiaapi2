@@ -564,7 +564,7 @@ for each in range(3):
 #---------------------------------------------- Disparo com o IFFT - TELEGRAM -------------------   
 @app.route("/ifttt", methods=["POST"])
 def handler(): 
-    EntryContent = request.get_data(as_text=True)
+    EntryContent = "null"
     datetime.datetime.now()
     datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
     print("Hora do disparo:")
