@@ -587,9 +587,9 @@ def handler():
         soup = BeautifulSoup(resp.content, features="xml")
 
         items = soup.findAll('item')
-        g = 4
+        f = 4
         for item in range(5):
-            item = items[g]
+            item = items[f]
 
             print(item.title.text)
             print(item.link.text)
@@ -624,7 +624,7 @@ def handler():
          
                 texto = '[' + item.title.text + '](' + link + ') \n \n' '[' + 'Link alternativo' + '](' + 'https://outline.com/' + link + ')' 
                 bot.send_message(chat_id, texto, parse_mode='markdown', disable_web_page_preview=True)
-            g = g - 1
+            f = f - 1
 
     except:
         print("error")
