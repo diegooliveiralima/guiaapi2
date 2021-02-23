@@ -584,11 +584,11 @@ def handler():
   
         resp = requests.get(url2)
 
-        soup = BeautifulSoup(resp.content, features="xml")
+        soup = BeautifulSoup(resp.content, features="html.parser")
 
         items = soup.findAll('item')
         k = 4
-        for item in range(4):
+        for item in range(5):
             item = items[k]
 
             print(item.title.text)
