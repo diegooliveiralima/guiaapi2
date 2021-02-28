@@ -9,7 +9,7 @@ google==1.9.3
 beautifulsoup4==4.9.1
 mysql-connector-python-rf==2.2.2
 google-api-python-client==1.6.2
-python-telegram-bot==11.1.0
+python-telegram-bot
 PyPDF2==1.26.0
 EbookLib==0.17.1
 tika==1.12
