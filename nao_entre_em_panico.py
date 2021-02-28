@@ -695,7 +695,7 @@ def handler():
             testador = re.sub("&", "", testador)
             testador = re.sub("-", "", testador)
             testador = re.sub(":", "", testador)
-            testador = re.sub(r'*', "", testador)
+            
             testador = re.sub("é", "e", testador)
             testador = re.sub("´", "", testador)
            
@@ -1110,13 +1110,13 @@ def enviarFilme(x, y, z):
         testador = re.sub("&", "", testador)
         testador = re.sub("-", "", testador)
         testador = re.sub(":", "", testador)
-        testador = re.sub(r'*', "", testador)
+        
         testador = re.sub("´", "", testador)
         query = re.sub("'", "", query)
         query = re.sub("&", "", query)
         query = re.sub("-", "", query)
         query = re.sub(":", "", query)
-        query = re.sub(r'*', "", query)
+        
 
         datetime.datetime.now()
         datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
