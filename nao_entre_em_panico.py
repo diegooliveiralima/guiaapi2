@@ -695,6 +695,9 @@ def handler():
             testador = re.sub("&", "", testador)
             testador = re.sub("-", "", testador)
             testador = re.sub(":", "", testador)
+            testador = re.sub("*", "", testador)
+            testador = re.sub("é", "e", testador)
+            testador = re.sub("´", "", testador)
            
             cursor = banco.cursor()
             cursor.execute("SELECT filme FROM filmes WHERE filme like '%" + testador +  "%'")
@@ -1107,6 +1110,8 @@ def enviarFilme(x, y, z):
         testador = re.sub("&", "", testador)
         testador = re.sub("-", "", testador)
         testador = re.sub(":", "", testador)
+        testador = re.sub("*", "", testador)
+        testador = re.sub("´", "", testador)
         query = re.sub("'", "", query)
         query = re.sub("&", "", query)
         query = re.sub("-", "", query)
