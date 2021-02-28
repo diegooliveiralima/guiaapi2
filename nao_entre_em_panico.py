@@ -135,7 +135,7 @@ else:
 
     cardapioNoite =  "<b>Principal:</b> " + nprincpal1 + ", "  + nprincpal2 + "\n" + "Vegetariano: " + nvegetariano + "\n" + "Saladas: " + nsalada1 + ", " + nsalada2 +  "\n" + "Guarnição: " + nguarnicao  + "\n" + "Acompanhamentos: " + nacompanha1 + ", " + nacompanha2 + ", " + nacompanha3 + "\n" + "Sopa: " + sopa + "\n" + "Acompanhamento da sopa: " + acompSopa + "\n" +  "Suco: " + nsuco + "\n" + "Sobremesas: " + nsobremesa1 + ", " + nsobremesa2
 
-    TOKEN = "1335874302:AAFXeWzqKNMyGzV6UVfoGHkEo9wc_GUdGyk"
+    TOKEN = "1335874302:AAHotHVxWgawnrYvmK2JrjdKyCkAbl8-8kE"
     bot = telegram.Bot(TOKEN)
     print("Bot do telegram conectado!")
     chat_id = "608446615"
@@ -160,7 +160,7 @@ def handlerAgenda():
     print(text)
     
     '''
-    TOKEN = "1335874302:AAFXeWzqKNMyGzV6UVfoGHkEo9wc_GUdGyk"
+    TOKEN = "1335874302:AAHotHVxWgawnrYvmK2JrjdKyCkAbl8-8kE"
     bot = telegram.Bot(TOKEN)
     print("Bot do telegram conectado!")
     chat_id = "-394502097"
@@ -281,7 +281,7 @@ def enviarLivroPDF(id, repeticao):
     progresso = int(progresso)
     
 
-    TOKEN = "1335874302:AAFXeWzqKNMyGzV6UVfoGHkEo9wc_GUdGyk"
+    TOKEN = "1335874302:AAHotHVxWgawnrYvmK2JrjdKyCkAbl8-8kE"
     bot = telegram.Bot(TOKEN)
     
     data = date.today().strftime('%d/%m/%Y')
@@ -464,7 +464,7 @@ def enviarLivro(myurl, id, repeticao):
     '''
     porcentagem = "{0:.0%}".format(proximo/len(ttext))   
     porcentagem = str(porcentagem)
-    TOKEN = "1335874302:AAFXeWzqKNMyGzV6UVfoGHkEo9wc_GUdGyk"
+    TOKEN = "1335874302:AAHotHVxWgawnrYvmK2JrjdKyCkAbl8-8kE"
     bot = telegram.Bot(TOKEN)
     print("Bot do telegram conectado!")
     data = date.today().strftime('%d/%m/%Y')
@@ -651,7 +651,7 @@ def handler():
             if ler == 1:
                 ofensiva = str(ofensiva)
                 f = str(f)
-                TOKEN = "1335874302:AAFXeWzqKNMyGzV6UVfoGHkEo9wc_GUdGyk"
+                TOKEN = "1335874302:AAHotHVxWgawnrYvmK2JrjdKyCkAbl8-8kE"
                 bot = telegram.Bot(TOKEN)
                 if idTemporario == "4":
                     chat_id = "-429509381"
@@ -1127,7 +1127,7 @@ def enviarFilme(x, y, z):
             if (fonte == "Usuários do Letterbox" and NotaIMDB < '6.0'):
                 print("Não enviar")
             else:
-                TOKEN = "1335874302:AAFXeWzqKNMyGzV6UVfoGHkEo9wc_GUdGyk"
+                TOKEN = "1335874302:AAHotHVxWgawnrYvmK2JrjdKyCkAbl8-8kE"
                 bot = telegram.Bot(TOKEN)
                 print("Bot do telegram conectado!")
                 chat_id = "@negados_alert"
@@ -1146,7 +1146,7 @@ def enviarFilme(x, y, z):
     else: 
         print("o texto digitado eh {}".format(titulo))
         imagemUrl = dicionario['Poster']
-        TOKEN = "1335874302:AAFXeWzqKNMyGzV6UVfoGHkEo9wc_GUdGyk"
+        TOKEN = "1335874302:AAHotHVxWgawnrYvmK2JrjdKyCkAbl8-8kE"
         bot = telegram.Bot(TOKEN)
         print("Bot do telegram conectado!")
         chat_id = "@movies_alert"
