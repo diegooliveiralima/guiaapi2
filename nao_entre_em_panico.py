@@ -691,7 +691,8 @@ def handler():
             testador = titulos
             testador = re.sub('’', '', testador)
             testador = re.sub("'", "", testador)
-           
+            
+            testador = re.sub("&", "", testador)
            
             cursor = banco.cursor()
             cursor.execute("SELECT filme FROM filmes WHERE filme like '%" + testador +  "%'")
