@@ -593,7 +593,8 @@ def handler():
 
             titulo = item.title.text
             link = item.link.text
-
+            print(titulo)
+            print(link)
             banco = mysql.connector.connect (
             host="us-cdbr-east-02.cleardb.com",
             user="b64ccbb6c5e3c0",
