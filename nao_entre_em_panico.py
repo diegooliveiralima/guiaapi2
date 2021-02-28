@@ -1102,6 +1102,7 @@ def enviarFilme(x, y, z):
         testador = testador.replace("'", "")
         testador = re.sub("'", "", testador)
         query = re.sub("'", "", query)
+        query = re.sub("&", "", query)
 
         datetime.datetime.now()
         datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
