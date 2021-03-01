@@ -711,9 +711,10 @@ def handler():
                 f2 = re.findall(r'Beyon', testador)
                 p2 = re.findall(r'Last Always', testador)
                 n2 = re.findall(r'A Voz Suprema do Blues', testador)
+                u2 = re.findall(r'Black Bottom', testador)
                 
                 
-                if t2 or f2 or p2:
+                if t2 or f2 or p2 or u2:
                    print("não enviar esse")
                 else:
                    sleep(20); enviarFilme(tituloAno, "", "Usuários do Letterbox") #após verificar se há nova postagem, envia o filme para a função do telegram
