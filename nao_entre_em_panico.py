@@ -707,11 +707,11 @@ def handler():
             
         
             if row_count <= 0:
-                t = re.findall(r'Euphoria', testador)
-                f = re.findall(r'Beyon', testador)
-                p = re.findall(r'Last Always', testador)
+                t2 = re.findall(r'Euphoria', testador)
+                f2 = re.findall(r'Beyon', testador)
+                p2 = re.findall(r'Last Always', testador)
                 
-                if t or f or p:
+                if t2 or f2 or p2:
                    print("não enviar esse")
                 else:
                    sleep(20); enviarFilme(tituloAno, "", "Usuários do Letterbox") #após verificar se há nova postagem, envia o filme para a função do telegram
