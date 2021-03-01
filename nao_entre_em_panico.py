@@ -581,7 +581,7 @@ def handler():
   
         resp = requests.get(url2)
 
-        soup = BeautifulSoup(resp.content, features="html.parser")
+        soup = BeautifulSoup(resp.content, features="xml")
 
         items = soup.findAll('item')
         k = 4
@@ -593,8 +593,7 @@ def handler():
 
             titulo = item.title.text
             link = item.link.text
-            print(titulo)
-            print(link)
+
             banco = mysql.connector.connect (
             host="us-cdbr-east-02.cleardb.com",
             user="b64ccbb6c5e3c0",
@@ -700,11 +699,24 @@ def handler():
             testador = re.sub("é", "e", testador)
             testador = re.sub("´", "", testador)
            
-           
-            sleep(20); enviarFilme(tituloAno, "", "Usuários do Letterbox") #após verificar se há nova postagem, envia o filme para a função do telegram
-        
-
+            cursor = banco.cursor()
+            cursor.execute("SELECT filme FROM filmes WHERE filme like '%" + testador +  "%'")
+            results = cursor.fetchall()
+            row_count = cursor.rowcount
+            print ("number of affected rows: {}".format(row_count))
             
+        
+            if row_count <= 0:
+                sleep(20); enviarFilme(tituloAno, "", "Usuários do Letterbox") #após verificar se há nova postagem, envia o filme para a função do telegram
+            else:
+                print("### LOG ### - " + users[g] + "  ### - O filme " +  testador + " já está cadastrado")
+                if row_count > 1:
+                    print("Encontrou varios filmes com esse titulo: " + testador + ", portanto não foram adicionados pontos")
+                else:
+                    cursor = banco.cursor()
+                    comando = "UPDATE filmes SET pontos = pontos + 1 WHERE filme like '%" + testador +  "%'"
+                    cursor.execute(comando)
+                    banco.commit() 
 
 
                 
@@ -1076,141 +1088,118 @@ def enviarFilme(x, y, z):
             genero = genero + " Curta"
     '''
     
-
-    cursor = banco.cursor()
-    cursor.execute("SELECT filme FROM filmes WHERE links = '" + linkIMDBInteiro +  "'")
-    results = cursor.fetchall()
-    row_count = cursor.rowcount
-    print ("number of affected rows: {}".format(row_count))
-    if row_count <= 0:
-    
-        if NotaIMDB <= '5.0' or n or (fonte == 'Top 10 do site torrentfreak' and NotaIMDB <= '6.0') or (fonte == 'Usuários do Letterbox' and year < 2019)  or (fonte == 'LegendasTv' and year < 2019) or (numeroCriticas < 15 and votosQuantidade < 700 and NotaIMDB <= '6.0' ) or (numeroCriticas < 10 and votosQuantidade < 700) or year == 0:
-            print("filme não passou no critério, um dos requisitos abaixos não foi suprido:")
-            print("Nota é " + NotaIMDB)
-            print("Genero é ")
-            print("Fonte é " + fonte)
-            print(votosQuantidade)
-            print(numeroCriticas)
+    if NotaIMDB <= '5.0' or n or (fonte == 'Top 10 do site torrentfreak' and NotaIMDB <= '6.0') or (fonte == 'Usuários do Letterbox' and year < 2019)  or (fonte == 'LegendasTv' and year < 2019) or (numeroCriticas < 15 and votosQuantidade < 700 and NotaIMDB <= '6.0' ) or (numeroCriticas < 10 and votosQuantidade < 700) or year == 0:
+        print("filme não passou no critério, um dos requisitos abaixos não foi suprido:")
+        print("Nota é " + NotaIMDB)
+        print("Genero é ")
+        print("Fonte é " + fonte)
+        print(votosQuantidade)
+        print(numeroCriticas)
 
 
-            banco = mysql.connector.connect (
-                host="us-cdbr-east-02.cleardb.com",
-                user="b64ccbb6c5e3c0",
-                passwd="1569cc14",
-                database="heroku_3d387bc54c19158"
-            )
+        banco = mysql.connector.connect (
+            host="us-cdbr-east-02.cleardb.com",
+            user="b64ccbb6c5e3c0",
+            passwd="1569cc14",
+            database="heroku_3d387bc54c19158"
+        )
 
-            testador = nomeIngles.replace("\t", "")
-            testador = testador.replace("'", "")
-            testador = re.sub("'", "", testador)
-            testador = re.sub("&", "", testador)
-            testador = re.sub("-", "", testador)
-            testador = re.sub(":", "", testador)
+        testador = nomeIngles.replace("\t", "")
+        testador = testador.replace("'", "")
+        testador = re.sub("'", "", testador)
+        testador = re.sub("&", "", testador)
+        testador = re.sub("-", "", testador)
+        testador = re.sub(":", "", testador)
         
-            testador = re.sub("´", "", testador)
-            query = re.sub("'", "", query)
-            query = re.sub("&", "", query)
-            query = re.sub("-", "", query)
-            query = re.sub(":", "", query)
+        testador = re.sub("´", "", testador)
+        query = re.sub("'", "", query)
+        query = re.sub("&", "", query)
+        query = re.sub("-", "", query)
+        query = re.sub(":", "", query)
         
 
-            datetime.datetime.now()
-            datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
+        datetime.datetime.now()
+        datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
         
-            hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            estado = "negado"
+        hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        estado = "negado"
 
+        cursor = banco.cursor()
+        cursor.execute("SELECT filme FROM filmes WHERE filme like '%" + testador +  "%'")
+        results = cursor.fetchall()
+        row_count = cursor.rowcount
+        print ("number of affected rows: {}".format(row_count))
+        if row_count <= 0:
             cursor = banco.cursor()
-            cursor.execute("SELECT filme FROM filmes WHERE filme like '%" + testador +  "%'")
-            results = cursor.fetchall()
-            row_count = cursor.rowcount
-            print ("number of affected rows: {}".format(row_count))
-            if row_count <= 0:
-                cursor = banco.cursor()
-                votosQuantidade = str(votosQuantidade)
-                pontos = 1
-                pontos = str(pontos)
-                comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + testador + " - " + query + "', '" + fonte + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "' ,  '" + pontos  +  "' ,  '" + linkIMDBInteiro  +  "')"      
-                cursor.execute(comando)
-                banco.commit() 
-                imagemUrl = dicionario['Poster']
+            votosQuantidade = str(votosQuantidade)
+            pontos = 1
+            pontos = str(pontos)
+            comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + testador + " - " + query + "', '" + fonte + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "' ,  '" + pontos  +   "')"
+            cursor.execute(comando)
+            banco.commit() 
+            imagemUrl = dicionario['Poster']
 
-                if (fonte == "Usuários do Letterbox" and NotaIMDB < '6.0'):
-                    print("Não enviar")
-                else:
-                    TOKEN = "1335874302:AAHotHVxWgawnrYvmK2JrjdKyCkAbl8-8kE"
-                    bot = telegram.Bot(TOKEN)
-                    print("Bot do telegram conectado!")
-                    chat_id = "@negados_alert"
-                    txt = '[​​​​​​​​​​​](' + imagemUrl + ')' + '*' + nomeFormatado + nomeIngles + ' ' + anoFormatado + '*  \n' + 'Gênero: ' + genero + '  \n' +  'Sinopse: ' +  Sinopse   + '  \n' +  'Notas: IMDB ' + NotaIMDB + ' / RottenTomatoes ' +  NotaTomate  + '  \n' +  'Links: ' +  '[IMDB](' + linkIMDBInteiro + ')'  +  ' / '  +  '[Filmow](' + linkFilmow + ')'  + ' / ' + '[Trailer](' + linkTrailer + ')'  +  '  \n' +  'Fonte: ' + fonte
-                    bot.send_message(chat_id, txt, parse_mode='markdown')
+            if (fonte == "Usuários do Letterbox" and NotaIMDB < '6.0'):
+                print("Não enviar")
             else:
-                print("### LOG ### - Blog Top10filmes ### - O filme "  + testador + " já está cadastrado")
+                TOKEN = "1335874302:AAHotHVxWgawnrYvmK2JrjdKyCkAbl8-8kE"
+                bot = telegram.Bot(TOKEN)
+                print("Bot do telegram conectado!")
+                chat_id = "@negados_alert"
+                txt = '[​​​​​​​​​​​](' + imagemUrl + ')' + '*' + nomeFormatado + nomeIngles + ' ' + anoFormatado + '*  \n' + 'Gênero: ' + genero + '  \n' +  'Sinopse: ' +  Sinopse   + '  \n' +  'Notas: IMDB ' + NotaIMDB + ' / RottenTomatoes ' +  NotaTomate  + '  \n' +  'Links: ' +  '[IMDB](' + linkIMDBInteiro + ')'  +  ' / '  +  '[Filmow](' + linkFilmow + ')'  + ' / ' + '[Trailer](' + linkTrailer + ')'  +  '  \n' +  'Fonte: ' + fonte
+                bot.send_message(chat_id, txt, parse_mode='markdown')
+        else:
+            print("### LOG ### - Blog Top10filmes ### - O filme "  + testador + " já está cadastrado")
 
        
 
         
         
         
-            return ""
-        # ---------------------------------------- Enviar filme para o telegram
-        else: 
-            print("o texto digitado eh {}".format(titulo))
-            imagemUrl = dicionario['Poster']
-            TOKEN = "1335874302:AAHotHVxWgawnrYvmK2JrjdKyCkAbl8-8kE"
-            bot = telegram.Bot(TOKEN)
-            print("Bot do telegram conectado!")
-            chat_id = "@movies_alert"
-            txt = '[​​​​​​​​​​​](' + imagemUrl + ')' + '*' + nomeFormatado + nomeIngles + ' ' + anoFormatado + '*  \n' + 'Gênero: ' + genero + '  \n' +  'Sinopse: ' +  Sinopse   + '  \n' +  'Notas: IMDB ' + NotaIMDB + ' / RottenTomatoes ' +  NotaTomate  + '  \n' +  'Links: ' +  '[IMDB](' + linkIMDBInteiro + ')'  +  ' / '  +  '[Filmow](' + linkFilmow + ')'  + ' / ' + '[Trailer](' + linkTrailer + ')'  +  '  \n' +  'Fonte: ' + fonte
-            bot.send_message(chat_id, txt, parse_mode='markdown')
+        return ""
+    # ---------------------------------------- Enviar filme para o telegram
+    else: 
+        print("o texto digitado eh {}".format(titulo))
+        imagemUrl = dicionario['Poster']
+        TOKEN = "1335874302:AAHotHVxWgawnrYvmK2JrjdKyCkAbl8-8kE"
+        bot = telegram.Bot(TOKEN)
+        print("Bot do telegram conectado!")
+        chat_id = "@movies_alert"
+        txt = '[​​​​​​​​​​​](' + imagemUrl + ')' + '*' + nomeFormatado + nomeIngles + ' ' + anoFormatado + '*  \n' + 'Gênero: ' + genero + '  \n' +  'Sinopse: ' +  Sinopse   + '  \n' +  'Notas: IMDB ' + NotaIMDB + ' / RottenTomatoes ' +  NotaTomate  + '  \n' +  'Links: ' +  '[IMDB](' + linkIMDBInteiro + ')'  +  ' / '  +  '[Filmow](' + linkFilmow + ')'  + ' / ' + '[Trailer](' + linkTrailer + ')'  +  '  \n' +  'Fonte: ' + fonte
+        bot.send_message(chat_id, txt, parse_mode='markdown')
 
 
-            banco = mysql.connector.connect (
-                host="us-cdbr-east-02.cleardb.com",
-                user="b64ccbb6c5e3c0",
-                passwd="1569cc14",
-                database="heroku_3d387bc54c19158"
-            )
+        banco = mysql.connector.connect (
+            host="us-cdbr-east-02.cleardb.com",
+            user="b64ccbb6c5e3c0",
+            passwd="1569cc14",
+            database="heroku_3d387bc54c19158"
+        )
 
-            testador = nomeIngles.replace("\t", "")
-            testador = testador.replace("'", "")
-            testador = re.sub("'", "", testador)
-            query = re.sub("'", "", query)
+        testador = nomeIngles.replace("\t", "")
+        testador = testador.replace("'", "")
+        testador = re.sub("'", "", testador)
+        query = re.sub("'", "", query)
         
 
-            datetime.datetime.now()
-            datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
-            hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            estado = "enviado"
+        datetime.datetime.now()
+        datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
+        hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        estado = "enviado"
 
 
 
-            cursor = banco.cursor()
-            votosQuantidade = str(votosQuantidade)
-            pontos = 1
-            pontos = str(pontos)
-            comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + testador + " - " + query +  "', '" + fonte + "', '" + hora + "' , '" + estado + "' , '" + votosQuantidade +   "' ,  '" +  pontos  +  "' ,  '" + linkIMDBInteiro  +  "')" 
-            cursor.execute(comando)
-            banco.commit() 
-
-    
-
-        return 'a string'    
-
-
-
-    else:
-        print("### LOG ### - " + users[g] + "  ### - O filme " +  testador + " já está cadastrado")
-        if row_count > 1:
-            print("Encontrou varios filmes com esse titulo: " + testador + ", portanto não foram adicionados pontos")
-        else:
-            cursor = banco.cursor()
-            comando = "UPDATE filmes SET pontos = pontos + 1 WHERE filme like '%" + testador +  "%'"
-            cursor.execute(comando)
-            banco.commit() 
-
+        cursor = banco.cursor()
+        votosQuantidade = str(votosQuantidade)
+        pontos = 1
+        pontos = str(pontos)
+        comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + testador + " - " + query +  "', '" + fonte + "', '" + hora + "' , '" + estado + "' , '" + votosQuantidade +   "' ,  '" +  pontos   +  "')"
+        cursor.execute(comando)
+        banco.commit() 
 
     
+
+    return 'a string'
 
             
             
