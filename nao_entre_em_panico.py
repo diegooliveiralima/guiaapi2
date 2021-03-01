@@ -707,7 +707,14 @@ def handler():
             
         
             if row_count <= 0:
-                sleep(20); enviarFilme(tituloAno, "", "Usuários do Letterbox") #após verificar se há nova postagem, envia o filme para a função do telegram
+                t = re.findall(r'Euphoria', testador)
+                f = re.findall(r'Beyon', testador)
+                p = re.findall(r'Last Always', testador)
+                
+                if t or f or p:
+                   print("não enviar esse")
+                else:
+                   sleep(20); enviarFilme(tituloAno, "", "Usuários do Letterbox") #após verificar se há nova postagem, envia o filme para a função do telegram
             else:
                 print("### LOG ### - " + users[g] + "  ### - O filme " +  testador + " já está cadastrado")
                 if row_count > 1:
