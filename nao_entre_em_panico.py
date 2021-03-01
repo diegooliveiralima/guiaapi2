@@ -710,6 +710,8 @@ def handler():
                 t2 = re.findall(r'Euphoria', testador)
                 f2 = re.findall(r'Beyon', testador)
                 p2 = re.findall(r'Last Always', testador)
+                n2 = re.findall(r'A Voz Suprema do Blues', testador)
+                
                 
                 if t2 or f2 or p2:
                    print("não enviar esse")
