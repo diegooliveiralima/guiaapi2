@@ -562,7 +562,7 @@ for each in range(3):
 
    
 #---------------------------------------------- Disparo com o IFFT - TELEGRAM -------------------   
-@app.route("/ifttt", methods=["POST"])
+@app.route("/ifttt", methods=["GET"])
 def handler(): 
     EntryContent = request.get_data(as_text=True)
     datetime.datetime.now()
