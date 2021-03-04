@@ -572,7 +572,9 @@ def handler():
 
     print(EntryContent)
 
-    
+    url = "https://api.telegram.org/1564169676:AAEOan-Rx-3XXUTYeKQ9cs0-24NbgRbTHEc/sendMessage?chat_id=@unilabNoticias&text=message"
+    requests.post(url)
+
     try:
 
         url2 = "http://unilab.edu.br/noticias/category/noticias/feed/"
