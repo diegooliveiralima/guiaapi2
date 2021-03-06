@@ -8,15 +8,64 @@ import re
 
 
 
-bot_message = 'aaaa'
-_bot_token = "1564169676:AAEOan-Rx-3XXUTYeKQ9cs0-24NbgRbTHEc"
-_bot_chatID = "@unilabNoticias"
+try:
+
+    url2 = "http://unilab.edu.br/noticias/category/noticias/feed/"
 
 
-send_text = 'https://api.telegram.org/bot' + _bot_token + '/sendMessage?chat_id=' + _bot_chatID + '&parse_mode=Markdown&text=' + bot_message
+  
+    resp = requests.get(url2)
+
+    soup = BeautifulSoup(resp.content, features="xml")
+
+    items = soup.findAll('item')
+    k = 4
+    for item in range(5):
+        item = items[k]
+
+        print(item.title.text)
+        print(item.link.text)
+
+        titulo = item.title.text
+        link = item.link.text
+
+        banco = mysql.connector.connect (
+        host="us-cdbr-east-02.cleardb.com",
+        user="b64ccbb6c5e3c0",
+        passwd="1569cc14",
+        database="heroku_3d387bc54c19158"
+        )
+        cursor = banco.cursor()
+        cursor.execute("SELECT titulo FROM feed WHERE titulo like '%" + titulo +  "%'")
+        results = cursor.fetchall()
+        row_count = cursor.rowcount
+        print ("number of affected rows: {}".format(row_count))
+        if row_count > 0:
+           print("noticia já foi enviada anteriormente")
+        else:
+
+            cursor = banco.cursor()
+            comando = "INSERT INTO feed (titulo, link) values ('" + titulo + "' , '" + link + "')"
+            cursor.execute(comando)
+            banco.commit() 
+
+            
+            _bot_token = "1564169676:AAEOan-Rx-3XXUTYeKQ9cs0-24NbgRbTHEc"
+            _bot_chatID = "@unilabNoticias"
+
+            bot_message = '[' + item.title.text + '](' + link + ') \n \n' '[' + 'Link alternativo' + '](' + 'https://outline.com/' + link + ')' 
+            send_text = 'https://api.telegram.org/bot' + _bot_token + '/sendMessage?chat_id=' + _bot_chatID + '&parse_mode=Markdown&disable_web_page_preview=True&text=' + bot_message
 
 
-response = requests.get(send_text)
+            response = requests.get(send_text)
+         
+               
+        k = k - 1
+
+except:
+    print("error")
+
+
 '''
 url = "https://www.google.com.br/alerts/feeds/06114678530526052316/7725213029379595095"
 
@@ -567,70 +616,9 @@ def handler():
 
 
     
-    bot_message = 'aaaa'
-    _bot_token = "1564169676:AAEOan-Rx-3XXUTYeKQ9cs0-24NbgRbTHEc"
-    _bot_chatID = "@unilabNoticias"
+ 
 
 
-    send_text = 'https://api.telegram.org/bot' + _bot_token + '/sendMessage?chat_id=' + _bot_chatID + '&parse_mode=Markdown&text=' + bot_message
-
-
-    response = requests.get(send_text)
-
-
-
-    try:
-
-        url2 = "http://unilab.edu.br/noticias/category/noticias/feed/"
-
-
-  
-        resp = requests.get(url2)
-
-        soup = BeautifulSoup(resp.content, features="xml")
-
-        items = soup.findAll('item')
-        k = 4
-        for item in range(5):
-            item = items[k]
-
-            print(item.title.text)
-            print(item.link.text)
-
-            titulo = item.title.text
-            link = item.link.text
-
-            banco = mysql.connector.connect (
-            host="us-cdbr-east-02.cleardb.com",
-            user="b64ccbb6c5e3c0",
-            passwd="1569cc14",
-            database="heroku_3d387bc54c19158"
-            )
-            cursor = banco.cursor()
-            cursor.execute("SELECT titulo FROM feed WHERE titulo like '%" + titulo +  "%'")
-            results = cursor.fetchall()
-            row_count = cursor.rowcount
-            print ("number of affected rows: {}".format(row_count))
-            if row_count > 0:
-               print("noticia já foi enviada anteriormente")
-            else:
-
-                cursor = banco.cursor()
-                comando = "INSERT INTO feed (titulo, link) values ('" + titulo + "' , '" + link + "')"
-                cursor.execute(comando)
-                banco.commit() 
-
-                TOKEN = "1564169676:AAEOan-Rx-3XXUTYeKQ9cs0-24NbgRbTHEc"
-                bot = telegram.Bot(TOKEN)
-                print("Bot do telegram conectado!")
-                chat_id = "@unilabNoticias"
-         
-                texto = '[' + item.title.text + '](' + link + ') \n \n' '[' + 'Link alternativo' + '](' + 'https://outline.com/' + link + ')' 
-                bot.send_message(chat_id, texto, parse_mode='markdown', disable_web_page_preview=True)
-            k = k - 1
-
-    except:
-        print("error")
 
 
     banco = mysql.connector.connect (
