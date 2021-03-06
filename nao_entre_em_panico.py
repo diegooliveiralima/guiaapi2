@@ -4,7 +4,24 @@ from flask import Flask, jsonify
 import requests
 import json
 import re
+import mysql.connector
+from bs4 import BeautifulSoup
+from time import sleep
+import datetime
+from datetime import date
 
+from apiclient.discovery import build
+#rom google_auth_oauthlib.flow import InstalledAppFlow
+#scopes = ['https://www.googleapis.com/auth/calendar']
+#flow = InstalledAppFlow.from_client_secrets_file
+import telegram
+import sys
+
+import urllib.request
+import PyPDF2
+import io
+
+import ebooklib
 
 
 
