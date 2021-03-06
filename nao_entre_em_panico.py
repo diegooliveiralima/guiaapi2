@@ -67,7 +67,7 @@ try:
             banco.commit() 
 
             
-            _bot_token = "1564169676:AAEOan-Rx-3XXUTYeKQ9cs0-24NbgRbTHEc"
+            _bot_token = "1564169676:AAHUwrOqqiIytaRi7NDhnet0dSYAYsbSJ5A"
             _bot_chatID = "@unilabNoticias"
 
             bot_message = '[' + item.title.text + '](' + link + ') \n \n' '[' + 'Link alternativo' + '](' + 'https://outline.com/' + link + ')' 
