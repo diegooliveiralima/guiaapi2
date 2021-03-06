@@ -572,8 +572,21 @@ def handler():
 
     print(EntryContent)
 
-    url = "https://api.telegram.org/1564169676:AAEOan-Rx-3XXUTYeKQ9cs0-24NbgRbTHEc/sendMessage?chat_id=@unilabNoticias&text=message"
-    requests.post(url)
+    
+
+
+    
+    bot_message = 'aaaa'
+    _bot_token = "1564169676:AAEOan-Rx-3XXUTYeKQ9cs0-24NbgRbTHEc"
+    _bot_chatID = "@unilabNoticias"
+
+
+    send_text = 'https://api.telegram.org/bot' + _bot_token + '/sendMessage?chat_id=' + _bot_chatID + '&parse_mode=Markdown&text=' + bot_message
+
+
+    response = requests.get(send_text)
+
+
 
     try:
 
