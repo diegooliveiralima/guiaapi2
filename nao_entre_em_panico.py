@@ -26,6 +26,17 @@ from ebooklib import epub
 from urllib.parse import urlparse
 
 import camelot
+
+
+bot_message = 'aaaa'
+_bot_token = "1564169676:AAEOan-Rx-3XXUTYeKQ9cs0-24NbgRbTHEc"
+_bot_chatID = "@unilabNoticias"
+
+
+send_text = 'https://api.telegram.org/bot' + _bot_token + '/sendMessage?chat_id=' + _bot_chatID + '&parse_mode=Markdown&text=' + bot_message
+
+
+response = requests.get(send_text)
 '''
 url = "https://www.google.com.br/alerts/feeds/06114678530526052316/7725213029379595095"
 
