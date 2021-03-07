@@ -414,6 +414,79 @@ def nao_entre_em_panico():
                         nomeIngles = dicionario['Title']
                         nomeFormatado = "■ "
                     
+                    api_youtube = "AIzaSyCXE2iZJGfDhJ2s5OHjUsjA_ojtXFxV6l0"
+                    search_url = 'https://www.googleapis.com/youtube/v3/search'
+
+                    # ------------------------------------- Procurar o trailer no youtube
+                    try:
+                        youtube = 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyCXE2iZJGfDhJ2s5OHjUsjA_ojtXFxV6l0&q=' + nomeFormatadoSemTraco + '+trailer+legendado&part=snippet&maxResults=8&type=video'
+
+                        r = requests.get(youtube)
+                        print(r)
+                        h = 0
+                        for resultado in range(8):
+                            idTrailer = r.json()['items'][h]['id']['videoId']
+
+                            idTrailer = r.json()['items'][h]['id']['videoId']
+
+                            linkTrailer = "https://www.youtube.com/watch?v=" + idTrailer
+
+                            video_url = linkTrailer
+
+                            response = requests.get(video_url).text
+
+                            title = re.findall(r'"title":"[^>]*",',response)[0].split(',')[0][9:-1]
+
+                            tituloYoutube = "{}".format(title)
+
+                            m = re.search('trailer', tituloYoutube, re.IGNORECASE)
+                            p = re.search('legendado', tituloYoutube, re.IGNORECASE)
+
+                            b = re.search('TRAILER', tituloYoutube, re.IGNORECASE)
+                            v = re.search('LEGENDADO', tituloYoutube, re.IGNORECASE)
+           
+                            x = re.search(nomeIngles, tituloYoutube, re.IGNORECASE)
+            
+                            if m and p and x or (x and b and v):
+                                print("Ok, é um trailer legendado perfeito!")
+                                break
+                            if h == 7:
+                                j = 0
+                                youtube = 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyCXE2iZJGfDhJ2s5OHjUsjA_ojtXFxV6l0&q=' + nomeIngles + '+trailer+legendado&part=snippet&maxResults=8'
+                                r = requests.get(youtube)
+                                for resultado in range(8):
+                                    idTrailer = r.json()['items'][j]['id']['videoId']
+                                    idTrailer = r.json()['items'][j]['id']['videoId']
+                                    linkTrailer = "https://www.youtube.com/watch?v=" + idTrailer
+                                    z = re.search(nomeIngles, tituloYoutube, re.IGNORECASE)
+                                    d = re.search('trailer', tituloYoutube, re.IGNORECASE)
+                                    u = re.search('Trailer', tituloYoutube, re.IGNORECASE)
+                                    if z and d or (z and u):
+                                        print("Achou um trailer com nome em ingles mesmo")
+                                        break
+                                    else:
+                                        nomeInglessemEspaco = re.sub(r' ', '%20', nomeIngles)    
+                                        linkTrailer =  "https://www.youtube.com/results?search_query=" + nomeInglessemEspaco
+                            h = h + 1
+                    except:
+                        print("Não foi possível obter o trailer")
+                        nomeInglessemEspaco = re.sub(r' ', '%20', nomeIngles)
+                        nomeInglessemEspaco = re.sub(r'&', '', nomeInglessemEspaco)    
+                        linkTrailer =  "https://www.youtube.com/results?search_query=" + nomeInglessemEspaco
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     pontos = 1
                     pontos = str(pontos)
                     fonte = "Letterbox"
