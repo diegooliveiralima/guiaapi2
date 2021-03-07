@@ -151,85 +151,86 @@ app = Flask(__name__)
 
 @app.route('/', methods=["POST"])
 def nao_entre_em_panico():
-    return jsonify({"message": "Não entre em pânico!"})
 
 
-users = ("deathproof","austinburke", "silentdawn" )
+
     
-g = 0
-for number in users:
-    url = "https://letterboxd.com/" +  users[g]  + "/films/diary/"
-        
-    print("prcourando filmes na lista... " + url)
-    req = requests.get(url)
-    soup = BeautifulSoup(req.content, 'html.parser')
-    titulosLetterbox = soup.findAll('h3', class_='headline-3 prettify')
-    anosLetterbox = soup.findAll('td', class_='td-released center')
-    f = 0
-
-    for item in range(3):
-        titulos = titulosLetterbox[f]
-        anos = anosLetterbox[f]
+    users = ("deathproof","austinburke", "silentdawn" )
     
-        f = f + 1
-        titulos =  str(titulos.text) #passa para string
-        anos = str(anos.text)
-        titulos = re.sub('<h3 class="headline-3 prettify"><a href="/deathproof/film/', '', titulos)
-        titulos = re.sub(r'\/\"\>+.</a></h3>', '', titulos)  
-        titulos = re.sub('<h3 class="headline-3 prettify"><a href="/deathproof/film/', '', titulos)
-        anos = re.sub('<td class="td-released center<span>', '', anos)  
-        anos = re.sub('<span></td>', '', anos)      
-        tituloAno = titulos + " " + anos
-        print(tituloAno)
-        query = tituloAno
-        API_KEY = "AIzaSyC_ylJR_jjPf9h3JXWaOMj1pZ1shPzxPS4"
-        SEARCH_ENGINE_ID = "006935070929965711800:7vjhbn7medw"
-        page = 1
-        start = (page - 1) * 1 + 1
-        urlIMDB = f"https://www.googleapis.com/customsearch/v1?key={API_KEY}&cx={SEARCH_ENGINE_ID}&q={query}+imdb&start={start}"
-        dataIMDB = requests.get(urlIMDB).json()
-        linkIMDBInteiro = dataIMDB.get("items")[0]["link"] 
-        i = -1
-        for item in range(len(dataIMDB)):
-            i = i + 1
-            print("procurando links do imdb... " + dataIMDB.get("items")[i]["link"])
-            m = re.search(r'https://www.imdb.com/title/', dataIMDB.get("items")[i]["link"])
-            if m:
-                linkIMDBInteiro = dataIMDB.get("items")[i]["link"]
-                break
-        print("achou esse link do imdb: " + linkIMDBInteiro)
-
-        banco = mysql.connector.connect (
-        host="us-cdbr-east-02.cleardb.com",
-        user="b64ccbb6c5e3c0",
-        passwd="1569cc14",
-        database="heroku_3d387bc54c19158"
-        )
+    g = 0
+    for number in users:
+        url = "https://letterboxd.com/" +  users[g]  + "/films/diary/"
         
-        cursor = banco.cursor()
-        cursor.execute("select * from filmes where fonte = '" + linkIMDBInteiro +  "'")
-        results = cursor.fetchall()
-        row_count = cursor.rowcount
-        print ("number of affected rows: {}".format(row_count))
+        print("prcourando filmes na lista... " + url)
+        req = requests.get(url)
+        soup = BeautifulSoup(req.content, 'html.parser')
+        titulosLetterbox = soup.findAll('h3', class_='headline-3 prettify')
+        anosLetterbox = soup.findAll('td', class_='td-released center')
+        f = 0
 
-        if row_count <= 0:
-            print("Cadastrar filme")
+        for item in range(3):
+            titulos = titulosLetterbox[f]
+            anos = anosLetterbox[f]
+    
+            f = f + 1
+            titulos =  str(titulos.text) #passa para string
+            anos = str(anos.text)
+            titulos = re.sub('<h3 class="headline-3 prettify"><a href="/deathproof/film/', '', titulos)
+            titulos = re.sub(r'\/\"\>+.</a></h3>', '', titulos)  
+            titulos = re.sub('<h3 class="headline-3 prettify"><a href="/deathproof/film/', '', titulos)
+            anos = re.sub('<td class="td-released center<span>', '', anos)  
+            anos = re.sub('<span></td>', '', anos)      
+            tituloAno = titulos + " " + anos
+            print(tituloAno)
+            query = tituloAno
+            API_KEY = "AIzaSyC_ylJR_jjPf9h3JXWaOMj1pZ1shPzxPS4"
+            SEARCH_ENGINE_ID = "006935070929965711800:7vjhbn7medw"
+            page = 1
+            start = (page - 1) * 1 + 1
+            urlIMDB = f"https://www.googleapis.com/customsearch/v1?key={API_KEY}&cx={SEARCH_ENGINE_ID}&q={query}+imdb&start={start}"
+            dataIMDB = requests.get(urlIMDB).json()
+            linkIMDBInteiro = dataIMDB.get("items")[0]["link"] 
+            i = -1
+            for item in range(len(dataIMDB)):
+                i = i + 1
+                print("procurando links do imdb... " + dataIMDB.get("items")[i]["link"])
+                m = re.search(r'https://www.imdb.com/title/', dataIMDB.get("items")[i]["link"])
+                if m:
+                    linkIMDBInteiro = dataIMDB.get("items")[i]["link"]
+                    break
+            print("achou esse link do imdb: " + linkIMDBInteiro)
+
+            banco = mysql.connector.connect (
+            host="us-cdbr-east-02.cleardb.com",
+            user="b64ccbb6c5e3c0",
+            passwd="1569cc14",
+            database="heroku_3d387bc54c19158"
+            )
+        
             cursor = banco.cursor()
-            votosQuantidade = 0
-            votosQuantidade = str(votosQuantidade)
-            pontos = 1
-            pontos = str(pontos)
-            fonte = "Letterbox"
-            estado = "ativo"
-            datetime.datetime.now()
-            datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
-            hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + query + "', '" + linkIMDBInteiro + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "' ,  '" + pontos  +   "')"
-            cursor.execute(comando)
-            banco.commit() 
+            cursor.execute("select * from filmes where fonte = '" + linkIMDBInteiro +  "'")
+            results = cursor.fetchall()
+            row_count = cursor.rowcount
+            print ("number of affected rows: {}".format(row_count))
+
+            if row_count <= 0:
+                print("Cadastrar filme")
+                cursor = banco.cursor()
+                votosQuantidade = 0
+                votosQuantidade = str(votosQuantidade)
+                pontos = 1
+                pontos = str(pontos)
+                fonte = "Letterbox"
+                estado = "ativo"
+                datetime.datetime.now()
+                datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
+                hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + query + "', '" + linkIMDBInteiro + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "' ,  '" + pontos  +   "')"
+                cursor.execute(comando)
+                banco.commit() 
             
-        else:
-            print("Filme já cadastrado")
+            else:
+                print("Filme já cadastrado")
 
         
            
@@ -240,7 +241,7 @@ for number in users:
 
                 
 
-    g = g + 1
+        g = g + 1
 
 
 
@@ -268,66 +269,69 @@ for number in users:
 
 
 
-try:
+    try:
 
-    url2 = "http://unilab.edu.br/noticias/category/noticias/feed/"
+        url2 = "http://unilab.edu.br/noticias/category/noticias/feed/"
 
 
   
-    resp = requests.get(url2)
+        resp = requests.get(url2)
 
-    soup = BeautifulSoup(resp.content, features="xml")
+        soup = BeautifulSoup(resp.content, features="xml")
 
-    items = soup.findAll('item')
-    k = 4
-    for item in range(5):
-        item = items[k]
+        items = soup.findAll('item')
+        k = 4
+        for item in range(5):
+            item = items[k]
 
-        print(item.title.text)
-        print(item.link.text)
+            print(item.title.text)
+            print(item.link.text)
 
-        titulo = item.title.text
-        link = item.link.text
+            titulo = item.title.text
+            link = item.link.text
 
-        banco = mysql.connector.connect (
-        host="us-cdbr-east-02.cleardb.com",
-        user="b64ccbb6c5e3c0",
-        passwd="1569cc14",
-        database="heroku_3d387bc54c19158"
-        )
-        cursor = banco.cursor()
-        cursor.execute("SELECT titulo FROM feed WHERE titulo like '%" + titulo +  "%'")
-        results = cursor.fetchall()
-        row_count = cursor.rowcount
-        print ("number of affected rows: {}".format(row_count))
-        if row_count > 0:
-           print("noticia já foi enviada anteriormente")
-        else:
-
+            banco = mysql.connector.connect (
+            host="us-cdbr-east-02.cleardb.com",
+            user="b64ccbb6c5e3c0",
+            passwd="1569cc14",
+            database="heroku_3d387bc54c19158"
+            )
             cursor = banco.cursor()
-            comando = "INSERT INTO feed (titulo, link) values ('" + titulo + "' , '" + link + "')"
-            cursor.execute(comando)
-            banco.commit() 
+            cursor.execute("SELECT titulo FROM feed WHERE titulo like '%" + titulo +  "%'")
+            results = cursor.fetchall()
+            row_count = cursor.rowcount
+            print ("number of affected rows: {}".format(row_count))
+            if row_count > 0:
+               print("noticia já foi enviada anteriormente")
+            else:
+
+                cursor = banco.cursor()
+                comando = "INSERT INTO feed (titulo, link) values ('" + titulo + "' , '" + link + "')"
+                cursor.execute(comando)
+                banco.commit() 
 
             
-            _bot_token = "1564169676:AAHUwrOqqiIytaRi7NDhnet0dSYAYsbSJ5A"
-            _bot_chatID = "@unilabNoticias"
+                _bot_token = "1564169676:AAHUwrOqqiIytaRi7NDhnet0dSYAYsbSJ5A"
+                _bot_chatID = "@unilabNoticias"
 
-            bot_message = '[' + item.title.text + '](' + link + ') \n \n' '[' + 'Link alternativo' + '](' + 'https://outline.com/' + link + ')' 
-            send_text = 'https://api.telegram.org/bot' + _bot_token + '/sendMessage?chat_id=' + _bot_chatID + '&parse_mode=Markdown&disable_web_page_preview=True&text=' + bot_message
+                bot_message = '[' + item.title.text + '](' + link + ') \n \n' '[' + 'Link alternativo' + '](' + 'https://outline.com/' + link + ')' 
+                send_text = 'https://api.telegram.org/bot' + _bot_token + '/sendMessage?chat_id=' + _bot_chatID + '&parse_mode=Markdown&disable_web_page_preview=True&text=' + bot_message
 
 
-            response = requests.get(send_text)
+                response = requests.get(send_text)
          
                
-        k = k - 1
+            k = k - 1
 
-except:
-    print("error")
+    except:
+        print("error")
             
         
    
    
+    return jsonify({"message": "Não entre em pânico!"})
+
+
 
 
     
