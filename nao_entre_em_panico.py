@@ -494,6 +494,18 @@ def nao_entre_em_panico():
                     
                     if NotaIMDB <= '5.0' or Semcurta or (numeroCriticas < 15 and votosQuantidade < 700 and NotaIMDB <= '6.0' ) or (numeroCriticas < 10 and votosQuantidade < 700) or year == 0 or year or year < 2019:
                         print("Filme não passou nos critérios")
+                        
+                        votosQuantidade = str(votosQuantidade)
+                        year = str(year)
+                        NotaIMDB = str(NotaIMDB)
+                        NotaTomate = str(NotaTomate)
+                        sleep(10)
+                        TOKEN = "1335874302:AAGHfCU4hKFhp_LRQctCL3gYCtNDtntnN0Q"
+                        bot = telegram.Bot(TOKEN)
+                        print("Bot do telegram conectado!")
+                        chat_id = "@negados_alert"
+                        txt = '[​​​​​​​​​​​](' + imagemUrl + ')' + '*' + nomeFormatado + nomeIngles + ' ' + year + '*  \n' + 'Gênero: ' + genero + '  \n' +  'Sinopse: ' +  Sinopse   + '  \n' +  'Notas: IMDB ' + NotaIMDB + ' / RottenTomatoes ' +  NotaTomate  + '  \n' +  'Links: ' +  '[IMDB](' + linkIMDBInteiro + ')'  +  ' / '  +  '[Filmow](' + linkFilmow + ')'  + ' / ' + '[Trailer](' + linkTrailer + ')'  +  '  \n' +  'Fonte: ' + "Letterbox"
+                        bot.send_message(chat_id, txt, parse_mode='markdown')
                     else:
                         print("Enviando filme")
                         votosQuantidade = str(votosQuantidade)
@@ -572,7 +584,56 @@ def nao_entre_em_panico():
 
 
 
+        
 
+    url2 = "https://politepol.com/fd/6HkN11dApBSU"
+
+
+  
+    resp = requests.get(url2)
+
+    soup = BeautifulSoup(resp.content, features="xml")
+
+    items = soup.findAll('item')
+    g = 4
+    for item in range(5):
+        item = items[g]
+
+        print(item.title.text)
+        print(item.link.text)
+
+        titulo = item.title.text
+        link = item.link.text
+        titulo = re.sub('’', '', titulo)
+        titulo = re.sub("'", "", titulo)
+        banco = mysql.connector.connect (
+        host="us-cdbr-east-02.cleardb.com",
+        user="b64ccbb6c5e3c0",
+        passwd="1569cc14",
+        database="heroku_3d387bc54c19158"
+        )
+        cursor = banco.cursor()
+        cursor.execute("SELECT link FROM feed WHERE link = '" + link +  "'")
+        results = cursor.fetchall()
+        row_count = cursor.rowcount
+        print ("number of affected rows: {}".format(row_count))
+        if row_count > 0:
+           print("noticia já foi enviada anteriormente")
+        else:
+
+            cursor = banco.cursor()
+            comando = "INSERT INTO feed (titulo, link) values ('" + titulo + "' , '" + link + "')"
+            cursor.execute(comando)
+            banco.commit() 
+
+            TOKEN = "1335874302:AAGHfCU4hKFhp_LRQctCL3gYCtNDtntnN0Q"
+            bot = telegram.Bot(TOKEN)
+            print("Bot do telegram conectado!")
+            chat_id = "-1001427956969"
+         
+            texto = '[' + item.title.text + '](' + link + ') ' 
+            bot.send_message(chat_id, texto, parse_mode='markdown', disable_web_page_preview=True)
+        g = g - 1
 
 
 
