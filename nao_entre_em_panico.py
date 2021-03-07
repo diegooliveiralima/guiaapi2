@@ -232,7 +232,7 @@ def nao_entre_em_panico():
                     except:
                         numeroCriticas = "0"
                         print("erro ao pegar as criticas")
-                    numeroCriticas = re.sub('r\.', "", numeroCriticas)
+                    numeroCriticas = re.sub(',', "", numeroCriticas)
 
                     j = re.search('\d',numeroCriticas)
                     if j:
