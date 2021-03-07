@@ -271,11 +271,7 @@ def nao_entre_em_panico():
                     except:
                         votosQuantidade = "N/A"
                     votosQuantidade = re.sub(',', "", votosQuantidade)
-                    if votosQuantidade == 'N/A':
-                        print("Sem votos")
-                        votosQuantidade = 0
-                    else:
-                        votosQuantidade = int(votosQuantidade)
+                    
 
 
                     print("O titulo no imdb é: " + tituloIMDB + " A nota é: " + NotaIMDB + " notatomate: " + NotaTomate + " Votos: " + votosQuantidade + " numcriticas: " + numeroCriticas)
@@ -328,6 +324,11 @@ def nao_entre_em_panico():
                     datetime.datetime.now()
                     datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
                     numeroCriticas = int(numeroCriticas)
+                    if votosQuantidade == 'N/A':
+                        print("Sem votos")
+                        votosQuantidade = 0
+                    else:
+                        votosQuantidade = int(votosQuantidade)
         
                     hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     estado = "negado"
