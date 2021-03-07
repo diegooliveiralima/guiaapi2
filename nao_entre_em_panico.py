@@ -500,15 +500,12 @@ def nao_entre_em_panico():
                         NotaIMDB = str(NotaIMDB)
                         NotaTomate = str(NotaTomate)
                         
-                        _bot_token = "1335874302:AAGfJS-I6j8QJL1vpU_oryvlX0_4ZvnJSms"
-                        _bot_chatID = "@movies_alert"
-
-                        bot_message = '[​​​​​​​​​​​](' + imagemUrl + ')' + '*' + nomeFormatado + nomeIngles + ' ' + year + '*  \n' + 'Gênero: ' + genero + '  \n' +  'Sinopse: ' +  Sinopse   + '  \n' +  'Notas: IMDB ' + NotaIMDB + ' / RottenTomatoes ' +  NotaTomate  + '  \n' +  'Links: ' +  '[IMDB](' + linkIMDBInteiro + ')'  +  ' / '  +  '[Filmow](' + linkFilmow + ')'  + ' / ' + '[Trailer](' + linkTrailer + ')'  +  '  \n' +  'Fonte: ' + "Letterbox"
-                        send_text = 'https://api.telegram.org/bot' + _bot_token + '/sendMessage?chat_id=' + _bot_chatID + '&parse_mode=Markdown&disable_web_page_preview=True&text=' + bot_message
-
-
-                        response = requests.get(send_text)
-
+                        TOKEN = "1335874302:AAGfJS-I6j8QJL1vpU_oryvlX0_4ZvnJSms"
+                        bot = telegram.Bot(TOKEN)
+                        print("Bot do telegram conectado!")
+                        chat_id = "@movies_alert"
+                        txt = '[​​​​​​​​​​​](' + imagemUrl + ')' + '*' + nomeFormatado + nomeIngles + ' ' + year + '*  \n' + 'Gênero: ' + genero + '  \n' +  'Sinopse: ' +  Sinopse   + '  \n' +  'Notas: IMDB ' + NotaIMDB + ' / RottenTomatoes ' +  NotaTomate  + '  \n' +  'Links: ' +  '[IMDB](' + linkIMDBInteiro + ')'  +  ' / '  +  '[Filmow](' + linkFilmow + ')'  + ' / ' + '[Trailer](' + linkTrailer + ')'  +  '  \n' +  'Fonte: ' + "Letterbox"
+                        bot.send_message(chat_id, txt, parse_mode='markdown')
 
 
 
