@@ -495,6 +495,10 @@ def nao_entre_em_panico():
                         print("Filme não passou nos critérios")
                     else:
                         print("Enviando filme")
+                        votosQuantidade = str(votosQuantidade)
+                        year = str(year)
+                        NotaIMDB = str(NotaIMDB)
+                        NotaTomate = str(NotaTomate)
                         
                         _bot_token = "1335874302:AAGfJS-I6j8QJL1vpU_oryvlX0_4ZvnJSms"
                         _bot_chatID = "@movies_alert"
