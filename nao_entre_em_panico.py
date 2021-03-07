@@ -77,7 +77,7 @@ for number in users:
         )
         
         cursor = banco.cursor()
-        cursor.execute("select * from filmes where links = '" + linkIMDBInteiro +  "'")
+        cursor.execute("select * from filmes where fonte = '" + linkIMDBInteiro +  "'")
         results = cursor.fetchall()
         row_count = cursor.rowcount
         print ("number of affected rows: {}".format(row_count))
