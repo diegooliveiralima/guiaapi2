@@ -250,7 +250,7 @@ def nao_entre_em_panico():
 
 
     except:
-        prnt("erro")
+        print("erro")
 
 
 
