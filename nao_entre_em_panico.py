@@ -155,7 +155,7 @@ def nao_entre_em_panico():
 
 
     
-    users = ("deathproof","austinburke", "silentdawn" )
+    users = ("kurstboy","austinburke" )
     
     g = 0
     for number in users:
