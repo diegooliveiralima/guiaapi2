@@ -68,6 +68,13 @@ for number in users:
                 linkIMDBInteiro = dataIMDB.get("items")[i]["link"]
                 break
         print("achou esse link do imdb: " + linkIMDBInteiro)
+
+        banco = mysql.connector.connect (
+        host="us-cdbr-east-02.cleardb.com",
+        user="b64ccbb6c5e3c0",
+        passwd="1569cc14",
+        database="heroku_3d387bc54c19158"
+        )
         
         cursor = banco.cursor()
         cursor.execute("select * from filmes where links = '" + linkIMDBInteiro +  "'")
