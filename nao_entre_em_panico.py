@@ -219,6 +219,18 @@ def nao_entre_em_panico():
                 if row_count <= 0:
 
                     #PEGA DADOS IMDB 
+
+                    try:
+                        url = linkIMDBInteiro
+                        req = requests.get(url)
+                        soup = BeautifulSoup(req.content, 'html.parser')
+                        criticas = soup.find('div', class_='user-comments') #encontra todas as classes h2 do blog
+                        critica = criticas.findAll('a')
+                        print(critica[4].text)
+                        numeroCriticas = critica[4].text
+                    except:
+                        numeroCriticas = "0"
+                        print("erro ao pegar as criticas")
                     
                     linkIMDB = linkIMDBInteiro.replace("http://www.imdb.com/title/tt", "")
                     
@@ -246,7 +258,7 @@ def nao_entre_em_panico():
                     except:
                         votosQuantidade = "N/A"
                     
-                    print("O titulo no imdb é: " + tituloIMDB + "A nota é: " + NotaIMDB + "notatomate: " + NotaTomate + "Votos:" + votosQuantidade)
+                    print("O titulo no imdb é: " + tituloIMDB + " A nota é: " + NotaIMDB + " notatomate: " + NotaTomate + " Votos: " + votosQuantidade + " numcriticas: " + numeroCriticas)
                    
                     
                     banco = mysql.connector.connect (
@@ -257,6 +269,36 @@ def nao_entre_em_panico():
                             )
                     print("Não encontrou nenhum titulo")
                     #filme não existe, cadastra no banco para na proxima vez nao procurar mais por ele
+
+
+                    #PEGAR DADOS NO FILMOW
+
+                    page = 1
+                    start = (page - 1) * 1 + 1
+
+                    try:
+                        urlFilmow = f"https://www.googleapis.com/customsearch/v1?key={API_KEY}&cx={SEARCH_ENGINE_ID}&q={query}+filmow&start={start}"
+                        dataFilmow = requests.get(urlFilmow).json()
+                        linkFilmow = dataFilmow.get("items")[0]["link"] 
+                        f = -1
+                        for item in range(len(dataFilmow)):
+                            f = f + 1
+                            print("procurando links do filmow... " + dataFilmow.get("items")[f]["link"])
+                            m = re.search(r'filmow.com', dataFilmow.get("items")[f]["link"])
+                            if m:
+                                linkFilmow = dataFilmow.get("items")[f]["link"]
+                                print("achou esse link do filmow: " + linkFilmow)
+                                break
+                            else:
+                                querySemEspaco = re.sub(r' ', '%20', query)
+                                querySemEspaco = re.sub(r'&', '', querySemEspaco) 
+                                linkFilmow = "www.google.com/search?q=filmow%20" + querySemEspaco
+        
+                    except:
+                        querySemEspaco = re.sub(r' ', '%20', query)
+                        querySemEspaco = re.sub(r'&', '', querySemEspaco) 
+                        linkFilmow = "www.google.com/search?q=filmow%20" + querySemEspaco
+                    print(linkFilmow)
             
                             
                     votosQuantidade = str(votosQuantidade)
@@ -280,17 +322,7 @@ def nao_entre_em_panico():
 
 
 
-                    #CADASTRAR FILME
-                    print("Cadastrar filme")
-                    cursor = banco.cursor()
-                   
-                    estado = "ativo"
-                    datetime.datetime.now()
-                    datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
-                    hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                    comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + query + "', '" + linkIMDBInteiro + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "' ,  '" + pontos  +   "')"
-                    cursor.execute(comando)
-                    banco.commit() 
+                    
             
                 else:
                     print("Filme já cadastrado")
