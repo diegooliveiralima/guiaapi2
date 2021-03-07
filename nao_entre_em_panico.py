@@ -24,6 +24,69 @@ import io
 import ebooklib
 
 
+users = ("deathproof", "austinburke", "silentdawn", "kurstboy", "justmiaslife", "adrianbalboa", "max_delgado", "cervantes3", "joelollo", "twillis04", "xene", "jslk", "swaghili123")
+    
+g = 0
+for number in users:
+    url = "https://letterboxd.com/" +  users[g]  + "/films/diary/"
+        
+    print("prcourando filmes na lista... " + url)
+    req = requests.get(url)
+    soup = BeautifulSoup(req.content, 'html.parser')
+    titulosLetterbox = soup.findAll('h3', class_='headline-3 prettify')
+    anosLetterbox = soup.findAll('td', class_='td-released center')
+    f = 0
+
+    for item in range(3):
+        titulos = titulosLetterbox[f]
+        anos = anosLetterbox[f]
+    
+        f = f + 1
+        titulos =  str(titulos.text) #passa para string
+        anos = str(anos.text)
+        titulos = re.sub('<h3 class="headline-3 prettify"><a href="/deathproof/film/', '', titulos)
+        titulos = re.sub(r'\/\"\>+.</a></h3>', '', titulos)  
+        titulos = re.sub('<h3 class="headline-3 prettify"><a href="/deathproof/film/', '', titulos)
+        anos = re.sub('<td class="td-released center<span>', '', anos)  
+        anos = re.sub('<span></td>', '', anos)      
+        tituloAno = titulos + " " + anos
+        print(tituloAno)
+        
+           
+            
+            
+        
+
+
+                
+
+    g = g + 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 try:
 
