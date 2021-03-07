@@ -224,6 +224,7 @@ def nao_entre_em_panico():
                     linkIMDB = linkIMDB.replace("/maindetails", "")
                     linkIMDB = linkIMDB.replace("releaseinfo", "")
                     linkIMDBInteiro = linkIMDBInteiro.replace("releaseinfo", "")
+                    print(linkIMDB)
                     #linkFilmow = linkFilmow.replace("ficha-tecnica/", "")
 
                     try:
@@ -239,7 +240,8 @@ def nao_entre_em_panico():
                             NotaIMDB = dicionario['imdbRating']
                             print("A nota é: " + NotaIMDB)
                             print("O titulo no imdb é: " + tituloIMDB)
-                        except:
+                        except Exception as e: 
+                            print(e)
                             banco = mysql.connector.connect (
                             host="us-cdbr-east-02.cleardb.com",
                             user="b64ccbb6c5e3c0",
