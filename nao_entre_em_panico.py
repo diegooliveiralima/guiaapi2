@@ -155,7 +155,7 @@ def nao_entre_em_panico():
 
 
     try:
-        users = ("kurstboy","austinburke" )
+        users = ("kurstboy","austinburke", "justmiaslife", "adrianbalboa", "max_delgado", "cervantes3", "joelollo", "twillis04", "xene", "jslk", "swaghili123")
     
         g = 0
         for number in users:
@@ -500,7 +500,7 @@ def nao_entre_em_panico():
                         NotaIMDB = str(NotaIMDB)
                         NotaTomate = str(NotaTomate)
                         
-                        TOKEN = "1335874302:AAGfJS-I6j8QJL1vpU_oryvlX0_4ZvnJSms"
+                        TOKEN = "1335874302:AAGHfCU4hKFhp_LRQctCL3gYCtNDtntnN0Q"
                         bot = telegram.Bot(TOKEN)
                         print("Bot do telegram conectado!")
                         chat_id = "@movies_alert"
