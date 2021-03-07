@@ -491,7 +491,7 @@ def nao_entre_em_panico():
                     except:
                         year = 0
                     votosQuantidade = int(votosQuantidade)
-                    NotaIMDB = int(NotaIMDB)
+                    
                     
                     if NotaIMDB <= '5.0' or Semcurta or (numeroCriticas < 15 and votosQuantidade < 700 and NotaIMDB <= '6.0' ) or (numeroCriticas < 10 and votosQuantidade < 700) or year == 0 or year or year < 2019:
                         print("Filme não passou nos critérios")
@@ -501,7 +501,7 @@ def nao_entre_em_panico():
                         NotaIMDB = str(NotaIMDB)
                         NotaTomate = str(NotaTomate)
                         numeroCriticas = str(numeroCriticas)
-                        sleep(10)
+                        sleep(5)
                         TOKEN = "1335874302:AAGHfCU4hKFhp_LRQctCL3gYCtNDtntnN0Q"
                         bot = telegram.Bot(TOKEN)
                         print("Bot do telegram conectado!")
@@ -515,7 +515,7 @@ def nao_entre_em_panico():
                         NotaIMDB = str(NotaIMDB)
                         NotaTomate = str(NotaTomate)
                         numeroCriticas = str(numeroCriticas)
-                        sleep(10)
+                        sleep(5)
                         TOKEN = "1335874302:AAGHfCU4hKFhp_LRQctCL3gYCtNDtntnN0Q"
                         bot = telegram.Bot(TOKEN)
                         print("Bot do telegram conectado!")
