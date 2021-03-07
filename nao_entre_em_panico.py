@@ -183,7 +183,15 @@ def nao_entre_em_panico():
             tituloAno = titulos + " " + anos
             print(tituloAno)
             query = tituloAno
-            letterboxlink = "https://letterboxd.com/film/" + titulos
+
+            
+            a = titulos.find('a')
+            linkFilme = a['href']
+            linkFilme = re.sub('/' + users[g] + '/film/', '', linkFilme)
+            print(linkFilme)
+
+
+            letterboxlink = "https://letterboxd.com/film/" + linkFilme
             print(letterboxlink)
 
             req = requests.get(letterboxlink)
