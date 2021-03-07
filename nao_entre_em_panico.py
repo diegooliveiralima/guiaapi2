@@ -153,7 +153,7 @@ app = Flask(__name__)
 def nao_entre_em_panico():
 
 
-    return jsonify({"message": "Não entre em pânico!"})
+    
     try:
         users = ("kurstboy","austinburke", "justmiaslife", "adrianbalboa", "max_delgado", "cervantes3", "joelollo", "twillis04", "xene", "jslk", "swaghili123")
     
