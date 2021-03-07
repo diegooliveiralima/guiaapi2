@@ -84,6 +84,19 @@ for number in users:
 
         if row_count <= 0:
             print("Cadastrar filme")
+            cursor = banco.cursor()
+            votosQuantidade = str(votosQuantidade)
+            pontos = 1
+            pontos = str(pontos)
+            fonte = "Letterbox"
+            estado = "ativo"
+            datetime.datetime.now()
+            datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
+            hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + query + "', '" + linkIMDBInteiro + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "' ,  '" + pontos  +   "')"
+            cursor.execute(comando)
+            banco.commit() 
+            
         else:
             print("Filme já cadastrado")
 
