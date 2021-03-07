@@ -219,7 +219,7 @@ def nao_entre_em_panico():
                 if row_count <= 0:
 
                     #PEGA DADOS IMDB 
-
+                    #PEGA NUMERO DE CRITICAS
                     try:
                         url = linkIMDBInteiro
                         req = requests.get(url)
@@ -231,6 +231,19 @@ def nao_entre_em_panico():
                     except:
                         numeroCriticas = "0"
                         print("erro ao pegar as criticas")
+
+                    j = re.search('\d',numeroCriticas)
+                    if j:
+                        numeroCriticas = re.search(r'\d+',numeroCriticas).group()
+        
+                    else:
+                        numeroCriticas = '0'
+                    numeroCriticas = int(numeroCriticas)
+                    
+                    
+                    
+                    #PEGA NOTAS E TITULO
+
                     
                     linkIMDB = linkIMDBInteiro.replace("http://www.imdb.com/title/tt", "")
                     
@@ -257,7 +270,14 @@ def nao_entre_em_panico():
                        votosQuantidade = dicionario['imdbVotes']
                     except:
                         votosQuantidade = "N/A"
-                    
+                    votosQuantidade = re.sub(',', "", votosQuantidade)
+                    if votosQuantidade == 'N/A':
+                        print("Sem votos")
+                        votosQuantidade = 0
+                    else:
+                        votosQuantidade = int(votosQuantidade)
+
+
                     print("O titulo no imdb é: " + tituloIMDB + " A nota é: " + NotaIMDB + " notatomate: " + NotaTomate + " Votos: " + votosQuantidade + " numcriticas: " + numeroCriticas)
                    
                     
