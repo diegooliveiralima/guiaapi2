@@ -391,7 +391,28 @@ def nao_entre_em_panico():
                     except:
                         print("erro no link do filmow")
         
-
+                #pegar nome do filme para exibição formata
+                    nomeFormatado = " "
+                    nomeFormatadoSemTraco = " "
+                    nomeIngles = " "
+                    try:
+                        soup = BeautifulSoup(req.content, 'html.parser')
+                        nomeFormatado = soup.find('h1', itemprop='name')
+                        nomeFormatado =  str(nomeFormatado.text) #passa para string
+                        nomeFormatado = BeautifulSoup(nomeFormatado, 'html.parser').text
+                        nomeIngles = dicionario['Title']
+                        nomeFormatadoSemTraco = nomeFormatado
+                        if nomeIngles == nomeFormatado:
+                            nomeFormatado = ""
+                        else:
+                            nomeFormatadoSemTraco = nomeFormatado
+                            nomeFormatado = nomeFormatado + " - "
+                            print("Titulo em portuges:")
+                            print(nomeFormatado)
+                    except:
+                        print("Erro na busca do nome em português, apenas título inglês")
+                        nomeIngles = dicionario['Title']
+                        nomeFormatado = "■ "
                     
                     pontos = 1
                     pontos = str(pontos)
