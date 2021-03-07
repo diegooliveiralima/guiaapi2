@@ -154,85 +154,85 @@ def nao_entre_em_panico():
 
 
 
+    try:
+        users = ("kurstboy","austinburke" )
     
-    users = ("kurstboy","austinburke" )
-    
-    g = 0
-    for number in users:
-        url = "https://letterboxd.com/" +  users[g]  + "/films/diary/"
+        g = 0
+        for number in users:
+            url = "https://letterboxd.com/" +  users[g]  + "/films/diary/"
         
-        print("prcourando filmes na lista... " + url)
-        req = requests.get(url)
-        soup = BeautifulSoup(req.content, 'html.parser')
-        titulosLetterbox = soup.findAll('h3', class_='headline-3 prettify')
-        anosLetterbox = soup.findAll('td', class_='td-released center')
-        f = 0
-
-        for item in range(3):
-            titulos = titulosLetterbox[f]
-            anos = anosLetterbox[f]
-            a = titulos.find('a')
-            linkFilme = a['href']
-            linkFilme = re.sub('/' + users[g] + '/film/', '', linkFilme)
-            print(linkFilme)
-
-
-            letterboxlink = "https://letterboxd.com/film/" + linkFilme
-            print(letterboxlink)
-
-            f = f + 1
-            titulos =  str(titulos.text) #passa para string
-            anos = str(anos.text)
-            titulos = re.sub('<h3 class="headline-3 prettify"><a href="/deathproof/film/', '', titulos)
-            titulos = re.sub(r'\/\"\>+.</a></h3>', '', titulos)  
-            titulos = re.sub('<h3 class="headline-3 prettify"><a href="/deathproof/film/', '', titulos)
-            anos = re.sub('<td class="td-released center<span>', '', anos)  
-            anos = re.sub('<span></td>', '', anos)      
-            tituloAno = titulos + " " + anos
-            print(tituloAno)
-            query = tituloAno
-
-            
-            
-            req = requests.get(letterboxlink)
+            print("prcourando filmes na lista... " + url)
+            req = requests.get(url)
             soup = BeautifulSoup(req.content, 'html.parser')
-            Detalhes = soup.find('p', class_='text-link text-footer')
+            titulosLetterbox = soup.findAll('h3', class_='headline-3 prettify')
+            anosLetterbox = soup.findAll('td', class_='td-released center')
+            f = 0
 
-            a = Detalhes.find('a')
-            linkIMDBInteiro = a['href']
-            print(linkIMDBInteiro)
+            for item in range(3):
+                titulos = titulosLetterbox[f]
+                anos = anosLetterbox[f]
+                a = titulos.find('a')
+                linkFilme = a['href']
+                linkFilme = re.sub('/' + users[g] + '/film/', '', linkFilme)
+                print(linkFilme)
 
-            banco = mysql.connector.connect (
-            host="us-cdbr-east-02.cleardb.com",
-            user="b64ccbb6c5e3c0",
-            passwd="1569cc14",
-            database="heroku_3d387bc54c19158"
-            )
-        
-            cursor = banco.cursor()
-            cursor.execute("select * from filmes where fonte = '" + linkIMDBInteiro +  "'")
-            results = cursor.fetchall()
-            row_count = cursor.rowcount
-            print ("number of affected rows: {}".format(row_count))
 
-            if row_count <= 0:
-                print("Cadastrar filme")
-                cursor = banco.cursor()
-                votosQuantidade = 0
-                votosQuantidade = str(votosQuantidade)
-                pontos = 1
-                pontos = str(pontos)
-                fonte = "Letterbox"
-                estado = "ativo"
-                datetime.datetime.now()
-                datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
-                hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + query + "', '" + linkIMDBInteiro + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "' ,  '" + pontos  +   "')"
-                cursor.execute(comando)
-                banco.commit() 
+                letterboxlink = "https://letterboxd.com/film/" + linkFilme
+                print(letterboxlink)
+
+                f = f + 1
+                titulos =  str(titulos.text) #passa para string
+                anos = str(anos.text)
+                titulos = re.sub('<h3 class="headline-3 prettify"><a href="/deathproof/film/', '', titulos)
+                titulos = re.sub(r'\/\"\>+.</a></h3>', '', titulos)  
+                titulos = re.sub('<h3 class="headline-3 prettify"><a href="/deathproof/film/', '', titulos)
+                anos = re.sub('<td class="td-released center<span>', '', anos)  
+                anos = re.sub('<span></td>', '', anos)      
+                tituloAno = titulos + " " + anos
+                print(tituloAno)
+                query = tituloAno
+
             
-            else:
-                print("Filme já cadastrado")
+            
+                req = requests.get(letterboxlink)
+                soup = BeautifulSoup(req.content, 'html.parser')
+                Detalhes = soup.find('p', class_='text-link text-footer')
+
+                a = Detalhes.find('a')
+                linkIMDBInteiro = a['href']
+                print(linkIMDBInteiro)
+
+                banco = mysql.connector.connect (
+                host="us-cdbr-east-02.cleardb.com",
+                user="b64ccbb6c5e3c0",
+                passwd="1569cc14",
+                database="heroku_3d387bc54c19158"
+                )
+        
+                cursor = banco.cursor()
+                cursor.execute("select * from filmes where fonte = '" + linkIMDBInteiro +  "'")
+                results = cursor.fetchall()
+                row_count = cursor.rowcount
+                print ("number of affected rows: {}".format(row_count))
+
+                if row_count <= 0:
+                    print("Cadastrar filme")
+                    cursor = banco.cursor()
+                    votosQuantidade = 0
+                    votosQuantidade = str(votosQuantidade)
+                    pontos = 1
+                    pontos = str(pontos)
+                    fonte = "Letterbox"
+                    estado = "ativo"
+                    datetime.datetime.now()
+                    datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
+                    hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + query + "', '" + linkIMDBInteiro + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "' ,  '" + pontos  +   "')"
+                    cursor.execute(comando)
+                    banco.commit() 
+            
+                else:
+                    print("Filme já cadastrado")
 
         
            
@@ -243,13 +243,14 @@ def nao_entre_em_panico():
 
                 
 
-        g = g + 1
+            g = g + 1
 
 
 
 
 
-
+    except:
+        prnt("erro")
 
 
 
