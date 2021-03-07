@@ -238,7 +238,7 @@ def nao_entre_em_panico():
         
                     else:
                         numeroCriticas = '0'
-                    numeroCriticas = int(numeroCriticas)
+                    
                     
                     
                     
@@ -327,6 +327,7 @@ def nao_entre_em_panico():
                     fonte = "Letterbox"
                     datetime.datetime.now()
                     datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
+                    numeroCriticas = int(numeroCriticas)
         
                     hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     estado = "negado"
