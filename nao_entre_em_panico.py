@@ -171,7 +171,15 @@ def nao_entre_em_panico():
         for item in range(3):
             titulos = titulosLetterbox[f]
             anos = anosLetterbox[f]
-    
+            a = titulos.find('a')
+            linkFilme = a['href']
+            linkFilme = re.sub('/' + users[g] + '/film/', '', linkFilme)
+            print(linkFilme)
+
+
+            letterboxlink = "https://letterboxd.com/film/" + linkFilme
+            print(letterboxlink)
+
             f = f + 1
             titulos =  str(titulos.text) #passa para string
             anos = str(anos.text)
@@ -185,15 +193,7 @@ def nao_entre_em_panico():
             query = tituloAno
 
             
-            a = titulos.find('a')
-            linkFilme = a['href']
-            linkFilme = re.sub('/' + users[g] + '/film/', '', linkFilme)
-            print(linkFilme)
-
-
-            letterboxlink = "https://letterboxd.com/film/" + linkFilme
-            print(letterboxlink)
-
+            
             req = requests.get(letterboxlink)
             soup = BeautifulSoup(req.content, 'html.parser')
             Detalhes = soup.find('p', class_='text-link text-footer')
