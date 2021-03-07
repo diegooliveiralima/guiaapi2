@@ -169,7 +169,7 @@ def nao_entre_em_panico():
             f = 0
 
             for item in range(3):
-                sleep(5)
+                
                 titulos = titulosLetterbox[f]
                 anos = anosLetterbox[f]
                 a = titulos.find('a')
@@ -500,7 +500,7 @@ def nao_entre_em_panico():
                         year = str(year)
                         NotaIMDB = str(NotaIMDB)
                         NotaTomate = str(NotaTomate)
-                        
+                        sleep(10)
                         TOKEN = "1335874302:AAGHfCU4hKFhp_LRQctCL3gYCtNDtntnN0Q"
                         bot = telegram.Bot(TOKEN)
                         print("Bot do telegram conectado!")
