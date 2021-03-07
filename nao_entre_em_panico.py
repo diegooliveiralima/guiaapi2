@@ -473,6 +473,7 @@ def nao_entre_em_panico():
                         nomeInglessemEspaco = re.sub(r' ', '%20', nomeIngles)
                         nomeInglessemEspaco = re.sub(r'&', '', nomeInglessemEspaco)    
                         linkTrailer =  "https://www.youtube.com/results?search_query=" + nomeInglessemEspaco
+                    print(linkTrailer)
 
 
 
