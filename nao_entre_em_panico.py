@@ -169,6 +169,7 @@ def nao_entre_em_panico():
             f = 0
 
             for item in range(3):
+                sleep(5)
                 titulos = titulosLetterbox[f]
                 anos = anosLetterbox[f]
                 a = titulos.find('a')
