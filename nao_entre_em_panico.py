@@ -220,10 +220,10 @@ def nao_entre_em_panico():
 
                     #PEGA DADOS IMDB 
                     
-                    linkIMDB = linkIMDBInteiro.replace("http://www.imdb.com/title/", "")
+                    linkIMDB = linkIMDBInteiro.replace("http://www.imdb.com/title/tt", "")
                     
                     linkIMDB = linkIMDB.replace("/", "")
-                    linkIMDB = linkIMDB.replace("/maindetails", "")
+                    linkIMDB = linkIMDB.replace("maindetails", "")
                     linkIMDB = linkIMDB.replace("releaseinfo", "")
                     linkIMDBInteiro = linkIMDBInteiro.replace("releaseinfo", "")
                     print(linkIMDB)
