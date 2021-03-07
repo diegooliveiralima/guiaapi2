@@ -24,7 +24,7 @@ import io
 import ebooklib
 
 
-users = ("deathproof", "austinburke", "silentdawn", "kurstboy", "justmiaslife", "adrianbalboa", "max_delgado", "cervantes3", "joelollo", "twillis04", "xene", "jslk", "swaghili123")
+users = ("deathproof" )
     
 g = 0
 for number in users:
@@ -68,6 +68,18 @@ for number in users:
                 linkIMDBInteiro = dataIMDB.get("items")[i]["link"]
                 break
         print("achou esse link do imdb: " + linkIMDBInteiro)
+        
+        cursor = banco.cursor()
+        cursor.execute("select * from filmes where links = '" + linkIMDBInteiro +  "'")
+        results = cursor.fetchall()
+        row_count = cursor.rowcount
+        print ("number of affected rows: {}".format(row_count))
+
+        if row_count <= 0:
+            print("Cadastrar filme")
+        else:
+            print("Filme já cadastrado")
+
         
            
             
