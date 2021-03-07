@@ -292,32 +292,33 @@ def nao_entre_em_panico():
                     page = 1
                     start = (page - 1) * 1 + 1
 
-                    try:
-                        urlFilmow = f"https://www.googleapis.com/customsearch/v1?key={API_KEY}&cx={SEARCH_ENGINE_ID}&q={query}+filmow&start={start}"
-                        dataFilmow = requests.get(urlFilmow).json()
-                        linkFilmow = dataFilmow.get("items")[0]["link"] 
-                        f = -1
-                        for item in range(len(dataFilmow)):
-                            f = f + 1
-                            print("procurando links do filmow... " + dataFilmow.get("items")[f]["link"])
-                            m = re.search(r'filmow.com', dataFilmow.get("items")[f]["link"])
-                            if m:
-                                linkFilmow = dataFilmow.get("items")[f]["link"]
-                                print("achou esse link do filmow: " + linkFilmow)
-                                break
-                            else:
-                                querySemEspaco = re.sub(r' ', '%20', query)
-                                querySemEspaco = re.sub(r'&', '', querySemEspaco) 
-                                linkFilmow = "www.google.com/search?q=filmow%20" + querySemEspaco
-        
-                    except:
-                        querySemEspaco = re.sub(r' ', '%20', query)
-                        querySemEspaco = re.sub(r'&', '', querySemEspaco) 
-                        linkFilmow = "www.google.com/search?q=filmow%20" + querySemEspaco
+                    
+                    urlFilmow = f"https://www.googleapis.com/customsearch/v1?key={API_KEY}&cx={SEARCH_ENGINE_ID}&q={query}+filmow&start={start}"
+                    dataFilmow = requests.get(urlFilmow).json()
+                    linkFilmow = dataFilmow.get("items")[0]["link"] 
                     print(linkFilmow)
+                    f = -1
+                    for item in range(len(dataFilmow)):
+                        f = f + 1
+                        print("procurando links do filmow... " + dataFilmow.get("items")[f]["link"])
+                        m = re.search(r'filmow.com', dataFilmow.get("items")[f]["link"])
+                        if m:
+                            linkFilmow = dataFilmow.get("items")[f]["link"]
+                            print("achou esse link do filmow: " + linkFilmow)
+                            break
+                        else:
+                            querySemEspaco = re.sub(r' ', '%20', query)
+                            querySemEspaco = re.sub(r'&', '', querySemEspaco) 
+                            linkFilmow = "www.google.com/search?q=filmow%20" + querySemEspaco
+        
+                    
+                            querySemEspaco = re.sub(r' ', '%20', query)
+                            querySemEspaco = re.sub(r'&', '', querySemEspaco) 
+                            linkFilmow = "www.google.com/search?q=filmow%20" + querySemEspaco
+                            print(linkFilmow)
             
                             
-                    votosQuantidade = str(votosQuantidade)
+                    
                     pontos = 1
                     pontos = str(pontos)
                     fonte = "Letterbox"
@@ -329,6 +330,7 @@ def nao_entre_em_panico():
                         votosQuantidade = 0
                     else:
                         votosQuantidade = int(votosQuantidade)
+                    votosQuantidade = str(votosQuantidade)
         
                     hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     estado = "negado"
