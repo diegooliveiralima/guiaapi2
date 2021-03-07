@@ -261,6 +261,7 @@ def nao_entre_em_panico():
                     NotaIMDB = dicionario['imdbRating']
                     year = dicionario['Year']
                     generoIngles = dicionario['Genre']
+                    imagemUrl = dicionario['Poster'
                     n2 = re.search('Short', generoIngles, re.IGNORECASE)
                             
                     try:
@@ -494,6 +495,15 @@ def nao_entre_em_panico():
                         print("Filme não passou nos critérios")
                     else:
                         print("Enviando filme")
+                        
+                        _bot_token = "1335874302:AAGfJS-I6j8QJL1vpU_oryvlX0_4ZvnJSms"
+                        _bot_chatID = "@movies_alert"
+
+                        bot_message = '[​​​​​​​​​​​](' + imagemUrl + ')' + '*' + nomeFormatado + nomeIngles + ' ' + year + '*  \n' + 'Gênero: ' + genero + '  \n' +  'Sinopse: ' +  Sinopse   + '  \n' +  'Notas: IMDB ' + NotaIMDB + ' / RottenTomatoes ' +  NotaTomate  + '  \n' +  'Links: ' +  '[IMDB](' + linkIMDBInteiro + ')'  +  ' / '  +  '[Filmow](' + linkFilmow + ')'  + ' / ' + '[Trailer](' + linkTrailer + ')'  +  '  \n' +  'Fonte: ' + "Letterbox"
+                        send_text = 'https://api.telegram.org/bot' + _bot_token + '/sendMessage?chat_id=' + _bot_chatID + '&parse_mode=Markdown&disable_web_page_preview=True&text=' + bot_message
+
+
+                        response = requests.get(send_text)
 
 
 
