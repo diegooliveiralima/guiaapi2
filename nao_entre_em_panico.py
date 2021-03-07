@@ -494,7 +494,7 @@ def nao_entre_em_panico():
                     votosQuantidade = int(votosQuantidade)
                     
                     
-                    if NotaIMDB <= '5.0' or Semcurta or (numeroCriticas < 15 and votosQuantidade < 700 and NotaIMDB <= '6.0' ) or (numeroCriticas < 10 and votosQuantidade < 700) or year == 0 or year or year < 2019:
+                    if NotaIMDB <= '5.0' or Semcurta or (numeroCriticas < 15 and votosQuantidade < 700 and NotaIMDB <= '6.0' ) or (numeroCriticas < 10 and votosQuantidade < 700) or year == 0  or year < 2019:
                         print("Filme não passou nos critérios")
                         
                         votosQuantidade = str(votosQuantidade)
