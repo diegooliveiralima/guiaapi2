@@ -183,22 +183,16 @@ def nao_entre_em_panico():
             tituloAno = titulos + " " + anos
             print(tituloAno)
             query = tituloAno
-            API_KEY = "AIzaSyC_ylJR_jjPf9h3JXWaOMj1pZ1shPzxPS4"
-            SEARCH_ENGINE_ID = "006935070929965711800:7vjhbn7medw"
-            page = 1
-            start = (page - 1) * 1 + 1
-            urlIMDB = f"https://www.googleapis.com/customsearch/v1?key={API_KEY}&cx={SEARCH_ENGINE_ID}&q={query}+imdb&start={start}"
-            dataIMDB = requests.get(urlIMDB).json()
-            linkIMDBInteiro = dataIMDB.get("items")[0]["link"] 
-            i = -1
-            for item in range(len(dataIMDB)):
-                i = i + 1
-                print("procurando links do imdb... " + dataIMDB.get("items")[i]["link"])
-                m = re.search(r'https://www.imdb.com/title/', dataIMDB.get("items")[i]["link"])
-                if m:
-                    linkIMDBInteiro = dataIMDB.get("items")[i]["link"]
-                    break
-            print("achou esse link do imdb: " + linkIMDBInteiro)
+            letterboxlink = "https://letterboxd.com/film/" + titulos
+            print(letterboxlink)
+
+            req = requests.get(letterboxlink)
+            soup = BeautifulSoup(req.content, 'html.parser')
+            Detalhes = soup.find('p', class_='text-link text-footer')
+
+            a = Detalhes.find('a')
+            linkIMDBInteiro = a['href']
+            print(linkIMDBInteiro)
 
             banco = mysql.connector.connect (
             host="us-cdbr-east-02.cleardb.com",
