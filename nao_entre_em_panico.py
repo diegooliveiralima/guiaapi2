@@ -490,7 +490,8 @@ def nao_entre_em_panico():
                         year = int(year)
                     except:
                         year = 0
-                    votosQuantidade = str(votosQuantidade)
+                    votosQuantidade = int(votosQuantidade)
+                    NotaIMDB = int(NotaIMDB)
                     
                     if NotaIMDB <= '5.0' or Semcurta or (numeroCriticas < 15 and votosQuantidade < 700 and NotaIMDB <= '6.0' ) or (numeroCriticas < 10 and votosQuantidade < 700) or year == 0 or year or year < 2019:
                         print("Filme não passou nos critérios")
@@ -499,6 +500,7 @@ def nao_entre_em_panico():
                         year = str(year)
                         NotaIMDB = str(NotaIMDB)
                         NotaTomate = str(NotaTomate)
+                        numeroCriticas = str(numeroCriticas)
                         sleep(10)
                         TOKEN = "1335874302:AAGHfCU4hKFhp_LRQctCL3gYCtNDtntnN0Q"
                         bot = telegram.Bot(TOKEN)
@@ -512,6 +514,7 @@ def nao_entre_em_panico():
                         year = str(year)
                         NotaIMDB = str(NotaIMDB)
                         NotaTomate = str(NotaTomate)
+                        numeroCriticas = str(numeroCriticas)
                         sleep(10)
                         TOKEN = "1335874302:AAGHfCU4hKFhp_LRQctCL3gYCtNDtntnN0Q"
                         bot = telegram.Bot(TOKEN)
@@ -597,6 +600,7 @@ def nao_entre_em_panico():
     items = soup.findAll('item')
     g = 4
     for item in range(5):
+        sleep(10)
         item = items[g]
 
         print(item.title.text)
