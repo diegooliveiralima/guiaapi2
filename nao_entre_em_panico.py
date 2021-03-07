@@ -502,7 +502,7 @@ def nao_entre_em_panico():
                         NotaIMDB = str(NotaIMDB)
                         NotaTomate = str(NotaTomate)
                         numeroCriticas = str(numeroCriticas)
-                        sleep(5)
+                        
                         TOKEN = "1335874302:AAGHfCU4hKFhp_LRQctCL3gYCtNDtntnN0Q"
                         bot = telegram.Bot(TOKEN)
                         print("Bot do telegram conectado!")
@@ -516,7 +516,7 @@ def nao_entre_em_panico():
                         NotaIMDB = str(NotaIMDB)
                         NotaTomate = str(NotaTomate)
                         numeroCriticas = str(numeroCriticas)
-                        sleep(5)
+                        
                         TOKEN = "1335874302:AAGHfCU4hKFhp_LRQctCL3gYCtNDtntnN0Q"
                         bot = telegram.Bot(TOKEN)
                         print("Bot do telegram conectado!")
@@ -601,7 +601,7 @@ def nao_entre_em_panico():
     items = soup.findAll('item')
     g = 4
     for item in range(5):
-        sleep(10)
+        
         item = items[g]
 
         print(item.title.text)
