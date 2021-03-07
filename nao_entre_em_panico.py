@@ -260,6 +260,8 @@ def nao_entre_em_panico():
                     tituloIMDB = dicionario['Title']
                     NotaIMDB = dicionario['imdbRating']
                     year = dicionario['Year']
+                    generoIngles = dicionario['Genre']
+                    n2 = re.search('Short', generoIngles, re.IGNORECASE)
                             
                     try:
                         NotaTomate = dicionario['Ratings'][1]
@@ -275,7 +277,7 @@ def nao_entre_em_panico():
                     
 
 
-                    print("O titulo no imdb é: " + tituloIMDB + " A nota é: " + NotaIMDB + " notatomate: " + NotaTomate + " Votos: " + votosQuantidade + " numcriticas: " + numeroCriticas + " ano: " + year)
+                    print("O titulo no imdb é: " + tituloIMDB + " A nota é: " + NotaIMDB + " notatomate: " + NotaTomate + " Votos: " + votosQuantidade + " numcriticas: " + numeroCriticas + " ano: " + year + " genero: " + generoIngles)
                    
                     
                     banco = mysql.connector.connect (
@@ -474,8 +476,8 @@ def nao_entre_em_panico():
                         nomeInglessemEspaco = re.sub(r'&', '', nomeInglessemEspaco)    
                         linkTrailer =  "https://www.youtube.com/results?search_query=" + nomeInglessemEspaco
                     print(linkTrailer)
-
-                    if NotaIMDB <= '5.0' or n or (numeroCriticas < 15 and votosQuantidade < 700 and NotaIMDB <= '6.0' ) or (numeroCriticas < 10 and votosQuantidade < 700) or year == 0:
+                    
+                    if NotaIMDB <= '5.0' or n2 or (numeroCriticas < 15 and votosQuantidade < 700 and NotaIMDB <= '6.0' ) or (numeroCriticas < 10 and votosQuantidade < 700) or year == 0:
                         print("Filme não passou nos critérios")
                     else:
                         print("Enviando filme")
