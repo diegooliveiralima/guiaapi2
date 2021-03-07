@@ -217,13 +217,64 @@ def nao_entre_em_panico():
                 print ("number of affected rows: {}".format(row_count))
 
                 if row_count <= 0:
+
+                    #PEGA DADOS IMDB 
+                    linkIMDB = linkIMDBInteiro.replace("https://www.imdb.com/title/tt", "")
+                    linkIMDB = linkIMDB.replace("/", "")
+                    linkIMDB = linkIMDB.replace("/maindetails", "")
+                    linkIMDB = linkIMDB.replace("releaseinfo", "")
+                    linkIMDBInteiro = linkIMDBInteiro.replace("releaseinfo", "")
+                    #linkFilmow = linkFilmow.replace("ficha-tecnica/", "")
+
+                    try:
+                        req = requests.get('http://www.omdbapi.com/?apikey=73634e02&type=movie&i=' + linkIMDB)
+                        dicionario = json.loads(req.text)
+                        tituloIMDB = dicionario['Title']
+                        NotaIMDB = dicionario['imdbRating']
+                    except:
+                        try:
+                            req = requests.get('http://www.omdbapi.com/?apikey=73634e02&type=movie&i=tt' + linkIMDB)
+                            dicionario = json.loads(req.text)
+                            tituloIMDB = dicionario['Title']
+                            NotaIMDB = dicionario['imdbRating']
+                            print("A nota é: " + NotaIMDB)
+                            print("O titulo no imdb é: " + tituloIMDB)
+                        except:
+                            banco = mysql.connector.connect (
+                            host="us-cdbr-east-02.cleardb.com",
+                            user="b64ccbb6c5e3c0",
+                            passwd="1569cc14",
+                            database="heroku_3d387bc54c19158"
+                            )
+                            print("Não encontrou nenhum titulo")
+                            #filme não existe, cadastra no banco para na proxima vez nao procurar mais por ele
+            
+                            votosQuantidade = 0
+                            votosQuantidade = str(votosQuantidade)
+                            pontos = 1
+                            pontos = str(pontos)
+                            fonte = "Letterbox"
+                            datetime.datetime.now()
+                            datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
+        
+                            hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            estado = "negado"
+                            cursor = banco.cursor()
+                            comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + query + "', '" + linkIMDBInteiro + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "' ,  '" + pontos  +   "')"
+                            cursor.execute(comando)
+                            banco.commit() 
+
+
+
+
+
+
+
+
+                    #CADASTRAR FILME
                     print("Cadastrar filme")
                     cursor = banco.cursor()
-                    votosQuantidade = 0
-                    votosQuantidade = str(votosQuantidade)
-                    pontos = 1
-                    pontos = str(pontos)
-                    fonte = "Letterbox"
+                   
                     estado = "ativo"
                     datetime.datetime.now()
                     datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
