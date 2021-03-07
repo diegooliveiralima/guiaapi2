@@ -219,7 +219,9 @@ def nao_entre_em_panico():
                 if row_count <= 0:
 
                     #PEGA DADOS IMDB 
-                    linkIMDB = linkIMDBInteiro.replace("https://www.imdb.com/title/tt", "")
+                    
+                    linkIMDB = linkIMDBInteiro.replace("http://www.imdb.com/title/", "")
+                    
                     linkIMDB = linkIMDB.replace("/", "")
                     linkIMDB = linkIMDB.replace("/maindetails", "")
                     linkIMDB = linkIMDB.replace("releaseinfo", "")
