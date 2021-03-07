@@ -259,6 +259,7 @@ def nao_entre_em_panico():
                     dicionario = json.loads(req.text)
                     tituloIMDB = dicionario['Title']
                     NotaIMDB = dicionario['imdbRating']
+                    year = dicionario['Year']
                             
                     try:
                         NotaTomate = dicionario['Ratings'][1]
@@ -352,7 +353,45 @@ def nao_entre_em_panico():
                         except:
                             Sinopse = dicionario['Plot']
             
-                            
+                    
+    #-------------------------------- Pegar os generos no filmow ou no imdb
+        
+                    try:
+                        url = linkFilmow
+                        req = requests.get(url)
+                        soup = BeautifulSoup(req.content, 'html.parser')
+                        generos = soup.find('div', class_="btn-tags-list") #encontra todas as classes h2 do blog
+                        generos = generos.findAll('a')
+                        a = 0
+                        genero = ""
+                        for tag in range(len(generos)):
+                            genero = genero + " " + generos[a].text
+                            a = a + 1
+                        print(genero)
+                    except:
+                        try:
+                            genero = dicionario['Genre']
+                        except:
+                            genero = "erro"
+
+                        #pega a nota no imdb se vier invalida
+                    try:
+                        if NotaIMDB == "N/A":      
+                            url = linkIMDBInteiro
+                            req = requests.get(url)
+                            soup = BeautifulSoup(req.content, 'html.parser')
+                            span = soup.find('span', itemprop='ratingValue') #encontra todas as classes h2 do blog
+                            NotaIMDB = span.text
+                        linkFilmow = re.sub(r'/ficha-tecnica/', "", linkFilmow)
+                    except:
+                        print("erro pegar nota IMDB")
+                    try:
+                        url = linkFilmow
+                        req = requests.get(url)
+                    except:
+                        print("erro no link do filmow")
+        
+
                     
                     pontos = 1
                     pontos = str(pontos)
@@ -365,6 +404,11 @@ def nao_entre_em_panico():
                         votosQuantidade = 0
                     else:
                         votosQuantidade = int(votosQuantidade)
+                    try:
+                       
+                        year = int(year)
+                    except:
+                        year = 0
                     votosQuantidade = str(votosQuantidade)
         
                     hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
