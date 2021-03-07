@@ -85,6 +85,7 @@ for number in users:
         if row_count <= 0:
             print("Cadastrar filme")
             cursor = banco.cursor()
+            votosQuantidade = 0
             votosQuantidade = str(votosQuantidade)
             pontos = 1
             pontos = str(pontos)
