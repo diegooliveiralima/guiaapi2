@@ -154,7 +154,7 @@ def nao_entre_em_panico():
 
 
 
-    try:
+    
         users = ("kurstboy","austinburke" )
     
         g = 0
@@ -250,8 +250,7 @@ def nao_entre_em_panico():
 
 
 
-    except:
-        print("erro")
+    
 
 
 
