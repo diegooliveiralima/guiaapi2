@@ -317,6 +317,40 @@ def nao_entre_em_panico():
                             querySemEspaco = re.sub(r'&', '', querySemEspaco) 
                             linkFilmow = "www.google.com/search?q=filmow%20" + querySemEspaco
                             print(linkFilmow)
+
+                    
+                    #pegar sinopse do filme para exibição formata
+                    try:
+                        url = linkFilmow
+                        req = requests.get(url)
+                        soup = BeautifulSoup(req.content, 'html.parser')
+                        Sinopse = soup.find('div', class_='description text-truncate') 
+                        Sinopse =  str(Sinopse.text) #passa para string
+                        Sinopse = BeautifulSoup(Sinopse, 'html.parser').text
+                        print(Sinopse)
+                    except:
+                        try:
+                            urlAdoro = f"https://www.googleapis.com/customsearch/v1?key={API_KEY}&cx={SEARCH_ENGINE_ID}&q={query}+adorocinema&start={start}"
+                            dataAdoro = requests.get(urlAdoro).json()
+                            linkAdoro = dataAdoro.get("items")[0]["link"] 
+                            f = -1
+                            for item in range(len(dataAdoro)):
+                                f = f + 1
+                                print("procurando links do filmow... " + dataAdoro.get("items")[f]["link"])
+                                m = re.search(r'adorocinema.com/filmes', dataAdoro.get("items")[f]["link"])
+                                if m:
+                                    linkAdoro = dataAdoro.get("items")[f]["link"]
+                                    break
+                            print("achou esse link do filmow: " + linkAdoro)
+                            url = linkAdoro
+                            req = requests.get(url)
+                            soup = BeautifulSoup(req.content, 'html.parser')
+                            Sinopse = soup.find('div', class_='content-txt') 
+                            Sinopse =  str(Sinopse.text) #passa para string
+                            Sinopse = BeautifulSoup(Sinopse, 'html.parser').text
+                            print(Sinopse)
+                        except:
+                            Sinopse = dicionario['Plot']
             
                             
                     
