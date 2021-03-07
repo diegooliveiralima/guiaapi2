@@ -476,6 +476,19 @@ def nao_entre_em_panico():
                         nomeInglessemEspaco = re.sub(r'&', '', nomeInglessemEspaco)    
                         linkTrailer =  "https://www.youtube.com/results?search_query=" + nomeInglessemEspaco
                     print(linkTrailer)
+
+                    numeroCriticas = int(numeroCriticas)
+                    if votosQuantidade == 'N/A':
+                        print("Sem votos")
+                        votosQuantidade = 0
+                    else:
+                        votosQuantidade = int(votosQuantidade)
+                    try:
+                       
+                        year = int(year)
+                    except:
+                        year = 0
+                    votosQuantidade = str(votosQuantidade)
                     
                     if NotaIMDB <= '5.0' or n2 or (numeroCriticas < 15 and votosQuantidade < 700 and NotaIMDB <= '6.0' ) or (numeroCriticas < 10 and votosQuantidade < 700) or year == 0:
                         print("Filme não passou nos critérios")
@@ -499,18 +512,7 @@ def nao_entre_em_panico():
                     fonte = "Letterbox"
                     datetime.datetime.now()
                     datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
-                    numeroCriticas = int(numeroCriticas)
-                    if votosQuantidade == 'N/A':
-                        print("Sem votos")
-                        votosQuantidade = 0
-                    else:
-                        votosQuantidade = int(votosQuantidade)
-                    try:
-                       
-                        year = int(year)
-                    except:
-                        year = 0
-                    votosQuantidade = str(votosQuantidade)
+                    
         
                     hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     estado = "negado"
