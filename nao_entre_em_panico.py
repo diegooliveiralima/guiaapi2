@@ -174,7 +174,7 @@ def nao_entre_em_panico():
                 a = titulos.find('a')
                 linkFilme = a['href']
                 linkFilme = re.sub('/' + users[g] + '/film/', '', linkFilme)
-                linkFilme = re.sub('1/', '', linkFilme)
+                linkFilme = re.sub('/1/', '', linkFilme)
                 print(linkFilme)
 
 
