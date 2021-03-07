@@ -54,7 +54,8 @@ for number in users:
         query = tituloAno
         API_KEY = "AIzaSyC_ylJR_jjPf9h3JXWaOMj1pZ1shPzxPS4"
         SEARCH_ENGINE_ID = "006935070929965711800:7vjhbn7medw"
-
+        page = 1
+        start = (page - 1) * 1 + 1
         urlIMDB = f"https://www.googleapis.com/customsearch/v1?key={API_KEY}&cx={SEARCH_ENGINE_ID}&q={query}+imdb&start={start}"
         dataIMDB = requests.get(urlIMDB).json()
         linkIMDBInteiro = dataIMDB.get("items")[0]["link"] 
