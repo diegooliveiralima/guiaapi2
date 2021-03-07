@@ -192,7 +192,7 @@ def nao_entre_em_panico():
                 tituloAno = titulos + " " + anos
                 print(tituloAno)
                 query = tituloAno
-
+                query = re.sub("&", "and", query)
             
             
                 req = requests.get(letterboxlink)
@@ -275,7 +275,7 @@ def nao_entre_em_panico():
                     
 
 
-                    print("O titulo no imdb é: " + tituloIMDB + " A nota é: " + NotaIMDB + " notatomate: " + NotaTomate + " Votos: " + votosQuantidade + " numcriticas: " + numeroCriticas)
+                    print("O titulo no imdb é: " + tituloIMDB + " A nota é: " + NotaIMDB + " notatomate: " + NotaTomate + " Votos: " + votosQuantidade + " numcriticas: " + numeroCriticas + " ano: " + year)
                    
                     
                     banco = mysql.connector.connect (
@@ -475,6 +475,10 @@ def nao_entre_em_panico():
                         linkTrailer =  "https://www.youtube.com/results?search_query=" + nomeInglessemEspaco
                     print(linkTrailer)
 
+                    if NotaIMDB <= '5.0' or n or (numeroCriticas < 15 and votosQuantidade < 700 and NotaIMDB <= '6.0' ) or (numeroCriticas < 10 and votosQuantidade < 700) or year == 0:
+                        print("Filme não passou nos critérios")
+                    else:
+                        print("Enviando filme")
 
 
 
