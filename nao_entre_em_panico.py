@@ -156,7 +156,7 @@ def nao_entre_em_panico():
 
     
     try:
-        users = ("kurstboy","austinburke", "justmiaslife", "adrianbalboa", "max_delgado", "cervantes3", "joelollo", "twillis04", "xene", "jslk", "swaghili123")
+        users = ("kurstboy","austinburke", "justmiaslife")
     
         g = 0
         for number in users:
