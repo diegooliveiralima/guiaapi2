@@ -23,7 +23,7 @@ import io
 
 import ebooklib
 from google_trans_new import google_translator
-
+import urllib3
 
 
 

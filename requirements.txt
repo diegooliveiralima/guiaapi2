@@ -16,6 +16,6 @@ tika==1.12
 camelot-py
 opencv-python-headless
 google_trans_new
-
+urllib3
 
 
