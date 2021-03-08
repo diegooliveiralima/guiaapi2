@@ -182,7 +182,7 @@ def nao_entre_em_panico():
     ciclo = str(ciclo)
     letterbox = "letterbox"
     cursor = banco.cursor()
-    comando = 'UPDATE controle  SET ciclo=' + ciclo + 'where titulo=' + letterbox 
+    comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo="letterbox"' 
     cursor.execute(comando)
     banco.commit() 
     
