@@ -165,13 +165,13 @@ def nao_entre_em_panico():
     ciclo = cursor.fetchall()
     ciclo = ciclo[0][0]
     ciclo = int(ciclo)
-    if ciclo  <= 0:
+    if ciclo  == 0:
         print("ciclo 0")
         users = ("kurstboy","austinburke", "justmiaslife")
-    if ciclo == 1:
+    elif ciclo == 1:
         users = ("adrianbalboa", "max_delgado", "cervantes3")
         print("Ciclo 1")
-    if ciclo == 2:
+    elif ciclo == 2:
         print("Ciclo 2")
         users = ("joelollo", "twillis04", "xene")
     else:
