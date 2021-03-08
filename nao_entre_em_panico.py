@@ -152,11 +152,28 @@ app = Flask(__name__)
 
 @app.route('/', methods=["POST"])
 def nao_entre_em_panico():
-
-
+    
+    banco = mysql.connector.connect (
+    host="us-cdbr-east-02.cleardb.com",
+    user="b64ccbb6c5e3c0",
+    passwd="1569cc14",
+    database="heroku_3d387bc54c19158"
+    )
+        
+    cursor = banco.cursor()
+    cursor.execute('SELECT ciclo from controle where titulo="letterbox"')
+    ciclo = cursor.fetchall()
+    ciclo = ciclo[0][0]
+    ciclo = int(ciclo)
+    if ciclo  <= 0:
+        print("ciclo é igual a 0")
+        users = ("kurstboy","austinburke", "justmiaslife")
+    else:
+        print("outro valor no ciclo")
+        users = ("adrianbalboa", "max_delgado", "cervantes3")
     
     try:
-        users = ("kurstboy","austinburke", "justmiaslife")
+       
     
         g = 0
         for number in users:
@@ -205,12 +222,7 @@ def nao_entre_em_panico():
                 linkIMDBInteiro = a['href']
                 print(linkIMDBInteiro)
 
-                banco = mysql.connector.connect (
-                host="us-cdbr-east-02.cleardb.com",
-                user="b64ccbb6c5e3c0",
-                passwd="1569cc14",
-                database="heroku_3d387bc54c19158"
-                )
+                
         
                 cursor = banco.cursor()
                 cursor.execute("select * from filmes where fonte = '" + linkIMDBInteiro +  "'")
