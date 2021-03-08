@@ -228,18 +228,20 @@ def nao_entre_em_panico():
                 query = tituloAno
                 query = re.sub("&", "and", query)
             
-            
-                req = requests.get(letterboxlink)
-                soup = BeautifulSoup(req.content, 'html.parser')
-                Detalhes = soup.find('p', class_='text-link text-footer')
+                try:
+                    req = requests.get(letterboxlink)
+                    soup = BeautifulSoup(req.content, 'html.parser')
+                    Detalhes = soup.find('p', class_='text-link text-footer')
 
-                a = Detalhes.find('a')
-                linkIMDBInteiro = a['href']
-                print(linkIMDBInteiro)
-                n = re.search('http://www.imdb.com/title/tt', linkIMDBInteiro, re.IGNORECASE)
-                if n:
-                    print("é um link IMDB")
-                else:
+                    a = Detalhes.find('a')
+                    linkIMDBInteiro = a['href']
+                    print(linkIMDBInteiro)
+                    n = re.search('http://www.imdb.com/title/tt', linkIMDBInteiro, re.IGNORECASE)
+                    if n:
+                        print("é um link IMDB")
+                    else:
+                        continue
+                except: 
                     continue
                 
         

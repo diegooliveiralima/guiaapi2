@@ -414,7 +414,7 @@ def handler():
     datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
     print("Hora do disparo:")
     print(datetime.datetime.now())
-
+    EntryContent = request.get_data(as_text=True)
     print(EntryContent)
 
     
