@@ -165,6 +165,7 @@ def nao_entre_em_panico():
     ciclo = cursor.fetchall()
     ciclo = ciclo[0][0]
     ciclo = int(ciclo)
+    print(ciclo)
     if ciclo  == 0:
         print("ciclo 0")
         users = ("kurstboy","austinburke", "justmiaslife")
