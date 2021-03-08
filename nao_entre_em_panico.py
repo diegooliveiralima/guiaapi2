@@ -640,11 +640,11 @@ def nao_entre_em_panico():
             translate_text = translator.translate(item.title.text,lang_src='en', lang_tgt='pt') 
              
             
-            texto = '[' + item.title.text + '](' + link + ') ' 
-            textoTraduzido = '[' + translate_text + '](' + link + ') ' 
+            texto = '[' + item.title.text + '](' + link + ') \n \n' + translate_text
+            
             
             bot.send_message(chat_id, texto, parse_mode='markdown', disable_web_page_preview=True)
-            bot.send_message(chat_id, textoTraduzido, parse_mode='markdown', disable_web_page_preview=True)
+            
         g = g - 1
 
 
