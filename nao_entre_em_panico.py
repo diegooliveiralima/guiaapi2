@@ -166,11 +166,23 @@ def nao_entre_em_panico():
     ciclo = ciclo[0][0]
     ciclo = int(ciclo)
     if ciclo  <= 0:
-        print("ciclo é igual a 0")
+        print("ciclo 0")
         users = ("kurstboy","austinburke", "justmiaslife")
-    else:
-        print("outro valor no ciclo")
+    if ciclo == 1:
         users = ("adrianbalboa", "max_delgado", "cervantes3")
+        print("Ciclo 1")
+    if ciclo == 2:
+        print("Ciclo 2")
+        users = ("joelollo", "twillis04", "xene", "jslk", "swaghili123")
+    else:
+        ciclo = -1
+        print("outro valor no ciclo")
+        
+    ciclo = ciclo + 1
+    cursor = banco.cursor()
+    comando = 'UPDATE controle  SET ciclo=' + ciclo + 'where titulo="letterbox"' 
+    cursor.execute(comando)
+    banco.commit() 
     
     try:
        
