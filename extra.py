@@ -1,4 +1,4 @@
-@app.route("/agenda", methods=["POST"])
+Ôªø@app.route("/agenda", methods=["POST"])
 def handlerAgenda():
     text = request.get_data()
     
@@ -97,7 +97,7 @@ def handlerLivro():
         
        
     else:
-        print("N„o È null, n„o ser· enviado o disparo di·rio")
+        print("N√£o √© null, n√£o ser√° enviado o disparo di√°rio")
         
 
     
@@ -195,7 +195,7 @@ def enviarLivro(myurl, id, repeticao):
         soup = re.sub(r'<img class="calibre1" src=', '', soup)
         soup = re.sub(r'(\-)(</p>)', r'\1', soup)
         soup = re.sub(r'(p\.)( </p>)', r'\1', soup)
-        soup = re.sub(r'(/d/d)(  |)', r'P·gina \1', soup)
+        soup = re.sub(r'(/d/d)(  |)', r'P√°gina \1', soup)
                
         soup = re.sub(r'"/>', '', soup)
         '''
@@ -454,9 +454,9 @@ def handler():
                 bot = telegram.Bot(TOKEN)
                 if idTemporario == "4":
                     chat_id = "-429509381"
-                txt = "Sua ofensiva est· " + ofensiva + ". VocÍ preicsa ler mais " + f + " bloco(s) para ficar com a leitura em dia"
+                txt = "Sua ofensiva est√° " + ofensiva + ". Voc√™ preicsa ler mais " + f + " bloco(s) para ficar com a leitura em dia"
                 bot.send_message(chat_id, txt, parse_mode='html')
-                print("ALERTA! Sua ofensiva est· " + ofensiva + ". VocÍ preicsa ler mais " + f + " bloco(s) para ficar com a leitura em dia")
+                print("ALERTA! Sua ofensiva est√° " + ofensiva + ". Voc√™ preicsa ler mais " + f + " bloco(s) para ficar com a leitura em dia")
                 break
             f = f + 1
     '''
@@ -488,15 +488,15 @@ def handler():
             anos = re.sub('<span></td>', '', anos)      
             tituloAno = titulos + " " + anos
             testador = titulos
-            testador = re.sub('í', '', testador)
+            testador = re.sub('‚Äô', '', testador)
             testador = re.sub("'", "", testador)
             
             testador = re.sub("&", "", testador)
             testador = re.sub("-", "", testador)
             testador = re.sub(":", "", testador)
             
-            testador = re.sub("È", "e", testador)
-            testador = re.sub("¥", "", testador)
+            testador = re.sub("√©", "e", testador)
+            testador = re.sub("¬¥", "", testador)
            
             cursor = banco.cursor()
             cursor.execute("SELECT filme FROM filmes WHERE filme like '%" + testador +  "%'")
@@ -514,13 +514,13 @@ def handler():
                 
                 
                 if t2 or f2 or p2 or u2:
-                   print("n„o enviar esse")
+                   print("n√£o enviar esse")
                 else:
-                   sleep(20); enviarFilme(tituloAno, "", "Usu·rios do Letterbox") #apÛs verificar se h· nova postagem, envia o filme para a funÁ„o do telegram
+                   sleep(20); enviarFilme(tituloAno, "", "Usu√°rios do Letterbox") #ap√≥s verificar se h√° nova postagem, envia o filme para a fun√ß√£o do telegram
             else:
-                print("### LOG ### - " + users[g] + "  ### - O filme " +  testador + " j· est· cadastrado")
+                print("### LOG ### - " + users[g] + "  ### - O filme " +  testador + " j√° est√° cadastrado")
                 if row_count > 1:
-                    print("Encontrou varios filmes com esse titulo: " + testador + ", portanto n„o foram adicionados pontos")
+                    print("Encontrou varios filmes com esse titulo: " + testador + ", portanto n√£o foram adicionados pontos")
                 else:
                     cursor = banco.cursor()
                     comando = "UPDATE filmes SET pontos = pontos + 1 WHERE filme like '%" + testador +  "%'"
@@ -553,19 +553,19 @@ def enviarFilme(x, y, z):
         #print(titulo.group())
         #titulo = titulo.group()
     else:
-        print("Filme est· sem ano")
+        print("Filme est√° sem ano")
 
     
     titulo = titulo.replace('"', '')
     titulo = titulo.replace('#', '')
     titulo = re.sub('&', "", titulo)
     query = titulo
-    print("quero È igual a: " + query)
+    print("quero √© igual a: " + query)
     page = 1
     start = (page - 1) * 1 + 1
     print(query)
 
-    if y: #se o fime est· sem o ano, ele precisar pegar o ano no IMDB
+    if y: #se o fime est√° sem o ano, ele precisar pegar o ano no IMDB
         print("foi enviado o y: " + y)
         linkIMDBInteiro = y
         url = linkIMDBInteiro
@@ -580,7 +580,7 @@ def enviarFilme(x, y, z):
         
 
     else:
-        #pesquisa no google o filme e IMDB j· com o ano
+        #pesquisa no google o filme e IMDB j√° com o ano
         urlIMDB = f"https://www.googleapis.com/customsearch/v1?key={API_KEY}&cx={SEARCH_ENGINE_ID}&q={query}+imdb&start={start}"
         dataIMDB = requests.get(urlIMDB).json()
         linkIMDBInteiro = dataIMDB.get("items")[0]["link"] 
@@ -596,7 +596,7 @@ def enviarFilme(x, y, z):
     
     m = re.search(r'\d\d\d\d', titulo)
     if m:
-        print("filme j· tem ano")
+        print("filme j√° tem ano")
     else:  #mais um para pegar ano de filmes sem ano do reddit
         url = linkIMDBInteiro
         req = requests.get(url)
@@ -670,8 +670,8 @@ def enviarFilme(x, y, z):
             passwd="1569cc14",
             database="heroku_3d387bc54c19158"
             )
-            print("N„o encontrou nenhum titulo")
-            #filme n„o existe, cadastra no banco para na proxima vez nao procurar mais por ele
+            print("N√£o encontrou nenhum titulo")
+            #filme n√£o existe, cadastra no banco para na proxima vez nao procurar mais por ele
             
 
             datetime.datetime.now()
@@ -738,7 +738,7 @@ def enviarFilme(x, y, z):
 
     
 
-    #pegar nome do filme para exibiÁ„o formata
+    #pegar nome do filme para exibi√ß√£o formata
     nomeFormatado = " "
     nomeFormatadoSemTraco = " "
     nomeIngles = " "
@@ -757,9 +757,9 @@ def enviarFilme(x, y, z):
             print("Titulo em portuges:")
             print(nomeFormatado)
     except:
-        print("Erro na busca do nome em portuguÍs, apenas tÌtulo inglÍs")
+        print("Erro na busca do nome em portugu√™s, apenas t√≠tulo ingl√™s")
         nomeIngles = dicionario['Title']
-        nomeFormatado = "? "
+        nomeFormatado = "‚ñ† "
     
     api_youtube = "AIzaSyCXE2iZJGfDhJ2s5OHjUsjA_ojtXFxV6l0"
     search_url = 'https://www.googleapis.com/youtube/v3/search'
@@ -795,7 +795,7 @@ def enviarFilme(x, y, z):
             x = re.search(nomeIngles, tituloYoutube, re.IGNORECASE)
             
             if m and p and x or (x and b and v):
-                print("Ok, È um trailer legendado perfeito!")
+                print("Ok, √© um trailer legendado perfeito!")
                 break
             if h == 7:
                 j = 0
@@ -816,7 +816,7 @@ def enviarFilme(x, y, z):
                         linkTrailer =  "https://www.youtube.com/results?search_query=" + nomeInglessemEspaco
             h = h + 1
     except:
-        print("N„o foi possÌvel obter o trailer")
+        print("N√£o foi poss√≠vel obter o trailer")
         nomeInglessemEspaco = re.sub(r' ', '%20', nomeIngles)
         nomeInglessemEspaco = re.sub(r'&', '', nomeInglessemEspaco)    
         linkTrailer =  "https://www.youtube.com/results?search_query=" + nomeInglessemEspaco
@@ -824,17 +824,17 @@ def enviarFilme(x, y, z):
 
 
     try:
-        #pegar o ano do filme para exibiÁ„o formatada
+        #pegar o ano do filme para exibi√ß√£o formatada
         url = linkIMDBInteiro
         req = requests.get(url)
         soup = BeautifulSoup(req.content, 'html.parser')
         span = soup.find(id='titleYear') #encontra todas as classes h2 do blog
         anoFormatado = span.text
     except:
-        print("N„o deu o ano imdb")
+        print("N√£o deu o ano imdb")
         anoFormatado = ""
 
-    #pegar sinopse do filme para exibiÁ„o formata
+    #pegar sinopse do filme para exibi√ß√£o formata
     try:
         url = linkFilmow
         req = requests.get(url)
@@ -885,23 +885,23 @@ def enviarFilme(x, y, z):
     else:
         votosQuantidade = int(votosQuantidade)
     numeroCriticas = int(numeroCriticas)
-    # -------------------------------------------- Negar um filme com base em critÈrios    
+    # -------------------------------------------- Negar um filme com base em crit√©rios    
     
     generoIngles = dicionario['Genre']
     n = re.search('Short', generoIngles, re.IGNORECASE)
     '''if n:
         a = re.search('curta', genero, re.IGNORECASE)
         if a:
-            prtint("O curta j· esta catalogado como curta")
+            prtint("O curta j√° esta catalogado como curta")
         else:
             genero = genero + " Curta"
     '''
     
-    if NotaIMDB <= '5.0' or n or (fonte == 'Top 10 do site torrentfreak' and NotaIMDB <= '6.0') or (fonte == 'Usu·rios do Letterbox' and year < 2019)  or (fonte == 'LegendasTv' and year < 2019) or (numeroCriticas < 15 and votosQuantidade < 700 and NotaIMDB <= '6.0' ) or (numeroCriticas < 10 and votosQuantidade < 700) or year == 0 or year < 2019:
-        print("filme n„o passou no critÈrio, um dos requisitos abaixos n„o foi suprido:")
-        print("Nota È " + NotaIMDB)
-        print("Genero È ")
-        print("Fonte È " + fonte)
+    if NotaIMDB <= '5.0' or n or (fonte == 'Top 10 do site torrentfreak' and NotaIMDB <= '6.0') or (fonte == 'Usu√°rios do Letterbox' and year < 2019)  or (fonte == 'LegendasTv' and year < 2019) or (numeroCriticas < 15 and votosQuantidade < 700 and NotaIMDB <= '6.0' ) or (numeroCriticas < 10 and votosQuantidade < 700) or year == 0 or year < 2019:
+        print("filme n√£o passou no crit√©rio, um dos requisitos abaixos n√£o foi suprido:")
+        print("Nota √© " + NotaIMDB)
+        print("Genero √© ")
+        print("Fonte √© " + fonte)
         print(votosQuantidade)
         print(numeroCriticas)
 
@@ -920,7 +920,7 @@ def enviarFilme(x, y, z):
         testador = re.sub("-", "", testador)
         testador = re.sub(":", "", testador)
         
-        testador = re.sub("¥", "", testador)
+        testador = re.sub("¬¥", "", testador)
         query = re.sub("'", "", query)
         query = re.sub("&", "", query)
         query = re.sub("-", "", query)
@@ -948,17 +948,17 @@ def enviarFilme(x, y, z):
             banco.commit() 
             imagemUrl = dicionario['Poster']
 
-            if (fonte == "Usu·rios do Letterbox" and NotaIMDB < '6.0'):
-                print("N„o enviar")
+            if (fonte == "Usu√°rios do Letterbox" and NotaIMDB < '6.0'):
+                print("N√£o enviar")
             else:
                 TOKEN = "1335874302:AAGfJS-I6j8QJL1vpU_oryvlX0_4ZvnJSms"
                 bot = telegram.Bot(TOKEN)
                 print("Bot do telegram conectado!")
                 chat_id = "@negados_alert"
-                txt = '[???????????](' + imagemUrl + ')' + '*' + nomeFormatado + nomeIngles + ' ' + anoFormatado + '*  \n' + 'GÍnero: ' + genero + '  \n' +  'Sinopse: ' +  Sinopse   + '  \n' +  'Notas: IMDB ' + NotaIMDB + ' / RottenTomatoes ' +  NotaTomate  + '  \n' +  'Links: ' +  '[IMDB](' + linkIMDBInteiro + ')'  +  ' / '  +  '[Filmow](' + linkFilmow + ')'  + ' / ' + '[Trailer](' + linkTrailer + ')'  +  '  \n' +  'Fonte: ' + fonte
+                txt = '[‚Äã‚Äã‚Äã‚Äã‚Äã‚Äã‚Äã‚Äã‚Äã‚Äã‚Äã](' + imagemUrl + ')' + '*' + nomeFormatado + nomeIngles + ' ' + anoFormatado + '*  \n' + 'G√™nero: ' + genero + '  \n' +  'Sinopse: ' +  Sinopse   + '  \n' +  'Notas: IMDB ' + NotaIMDB + ' / RottenTomatoes ' +  NotaTomate  + '  \n' +  'Links: ' +  '[IMDB](' + linkIMDBInteiro + ')'  +  ' / '  +  '[Filmow](' + linkFilmow + ')'  + ' / ' + '[Trailer](' + linkTrailer + ')'  +  '  \n' +  'Fonte: ' + fonte
                 bot.send_message(chat_id, txt, parse_mode='markdown')
         else:
-            print("### LOG ### - Blog Top10filmes ### - O filme "  + testador + " j· est· cadastrado")
+            print("### LOG ### - Blog Top10filmes ### - O filme "  + testador + " j√° est√° cadastrado")
 
        
 
@@ -974,7 +974,7 @@ def enviarFilme(x, y, z):
         bot = telegram.Bot(TOKEN)
         print("Bot do telegram conectado!")
         chat_id = "@movies_alert"
-        txt = '[???????????](' + imagemUrl + ')' + '*' + nomeFormatado + nomeIngles + ' ' + anoFormatado + '*  \n' + 'GÍnero: ' + genero + '  \n' +  'Sinopse: ' +  Sinopse   + '  \n' +  'Notas: IMDB ' + NotaIMDB + ' / RottenTomatoes ' +  NotaTomate  + '  \n' +  'Links: ' +  '[IMDB](' + linkIMDBInteiro + ')'  +  ' / '  +  '[Filmow](' + linkFilmow + ')'  + ' / ' + '[Trailer](' + linkTrailer + ')'  +  '  \n' +  'Fonte: ' + fonte
+        txt = '[‚Äã‚Äã‚Äã‚Äã‚Äã‚Äã‚Äã‚Äã‚Äã‚Äã‚Äã](' + imagemUrl + ')' + '*' + nomeFormatado + nomeIngles + ' ' + anoFormatado + '*  \n' + 'G√™nero: ' + genero + '  \n' +  'Sinopse: ' +  Sinopse   + '  \n' +  'Notas: IMDB ' + NotaIMDB + ' / RottenTomatoes ' +  NotaTomate  + '  \n' +  'Links: ' +  '[IMDB](' + linkIMDBInteiro + ')'  +  ' / '  +  '[Filmow](' + linkFilmow + ')'  + ' / ' + '[Trailer](' + linkTrailer + ')'  +  '  \n' +  'Fonte: ' + fonte
         bot.send_message(chat_id, txt, parse_mode='markdown')
 
 
