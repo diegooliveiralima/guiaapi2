@@ -15,7 +15,7 @@ EbookLib==0.17.1
 tika==1.12
 camelot-py
 opencv-python-headless
-googletrans
+google_trans_new
 
 
 

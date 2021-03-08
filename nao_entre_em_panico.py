@@ -22,7 +22,7 @@ import PyPDF2
 import io
 
 import ebooklib
-from googletrans import Translator
+from google_trans_new import google_translator
 
 
 
@@ -636,15 +636,15 @@ def nao_entre_em_panico():
             bot = telegram.Bot(TOKEN)
             print("Bot do telegram conectado!")
             chat_id = "-1001427956969"
-            translator = Translator()
-            traducao = translator.translate(item.title.text, dest = 'pt').text
+            translator = google_translator()  
+            translate_text = translator.translate('Hello!',lang_src='en', lang_tgt='de') 
              
             
             texto = '[' + item.title.text + '](' + link + ') ' 
-            textoTraduzido = '[' + traducao + '](' + link + ') ' 
+            textoTraduzido = '[' + translate_text + '](' + link + ') ' 
             
             bot.send_message(chat_id, texto, parse_mode='markdown', disable_web_page_preview=True)
-            bot.send_message(chat_id, texto, parse_mode='markdown', disable_web_page_preview=True)
+            bot.send_message(chat_id, textoTraduzido, parse_mode='markdown', disable_web_page_preview=True)
         g = g - 1
 
 
