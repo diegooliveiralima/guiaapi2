@@ -179,6 +179,7 @@ def nao_entre_em_panico():
         print("outro valor no ciclo")
         
     ciclo = ciclo + 1
+    ciclo = str(ciclo)
     cursor = banco.cursor()
     comando = 'UPDATE controle  SET ciclo=' + ciclo + 'where titulo="letterbox"' 
     cursor.execute(comando)
