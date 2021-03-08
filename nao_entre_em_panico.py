@@ -173,10 +173,11 @@ def nao_entre_em_panico():
         print("Ciclo 1")
     if ciclo == 2:
         print("Ciclo 2")
-        users = ("joelollo", "twillis04", "xene", "jslk", "swaghili123")
+        users = ("joelollo", "twillis04", "xene")
     else:
+        users = ("jslk", "swaghili123")
         ciclo = -1
-        print("outro valor no ciclo")
+        print("Ultimo ciclo")
         
     ciclo = ciclo + 1
     ciclo = str(ciclo)
@@ -235,7 +236,11 @@ def nao_entre_em_panico():
                 a = Detalhes.find('a')
                 linkIMDBInteiro = a['href']
                 print(linkIMDBInteiro)
-
+                n = re.search('http://www.imdb.com/title/tt', linkIMDBInteiro, re.IGNORECASE)
+                if n:
+                    print("é um link IMDB")
+                else:
+                    continue
                 
         
                 cursor = banco.cursor()
