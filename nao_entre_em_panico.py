@@ -152,7 +152,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=["POST"])
 def nao_entre_em_panico():
-    
+    #CRIAÇÃO DE CICLOS DE TIMEOUT ######################################################################################
     banco = mysql.connector.connect (
     host="us-cdbr-east-02.cleardb.com",
     user="b64ccbb6c5e3c0",
@@ -180,8 +180,9 @@ def nao_entre_em_panico():
         
     ciclo = ciclo + 1
     ciclo = str(ciclo)
+    letterbox = "letterbox"
     cursor = banco.cursor()
-    comando = 'UPDATE controle  SET ciclo=' + ciclo + 'where titulo="letterbox"' 
+    comando = 'UPDATE controle  SET ciclo=' + ciclo + 'where titulo=' + letterbox 
     cursor.execute(comando)
     banco.commit() 
     
@@ -245,8 +246,8 @@ def nao_entre_em_panico():
 
                 if row_count <= 0:
 
-                    #PEGA DADOS IMDB 
-                    #PEGA NUMERO DE CRITICAS
+                    #PEGA DADOS IMDB  ######################################################################################
+                    #PEGA NUMERO DE CRITICAS ######################################################################################
                     try:
                         url = linkIMDBInteiro
                         req = requests.get(url)
@@ -270,7 +271,7 @@ def nao_entre_em_panico():
                     
                     
                     
-                    #PEGA NOTAS E TITULO
+                    #PEGA NOTAS E TITULO ######################################################################################
 
                     
                     linkIMDB = linkIMDBInteiro.replace("http://www.imdb.com/title/tt", "")
@@ -319,7 +320,7 @@ def nao_entre_em_panico():
                     #filme não existe, cadastra no banco para na proxima vez nao procurar mais por ele
 
 
-                    #PEGAR DADOS NO FILMOW
+                    #PEGAR DADOS NO FILMOW ######################################################################################
 
                     page = 1
                     start = (page - 1) * 1 + 1
@@ -351,7 +352,7 @@ def nao_entre_em_panico():
                             print(linkFilmow)
 
                     
-                    #pegar sinopse do filme para exibição formata
+                    #pegar sinopse do filme para exibição formata ######################################################################################
                     try:
                         url = linkFilmow
                         req = requests.get(url)
@@ -385,7 +386,7 @@ def nao_entre_em_panico():
                             Sinopse = dicionario['Plot']
             
                     
-    #-------------------------------- Pegar os generos no filmow ou no imdb
+    #-------------------------------- Pegar os generos no filmow ou no imdb ######################################################################################
         
                     try:
                         url = linkFilmow
@@ -448,7 +449,7 @@ def nao_entre_em_panico():
                     api_youtube = "AIzaSyCXE2iZJGfDhJ2s5OHjUsjA_ojtXFxV6l0"
                     search_url = 'https://www.googleapis.com/youtube/v3/search'
 
-                    # ------------------------------------- Procurar o trailer no youtube
+                    # ------------------------------------- Procurar o trailer no youtube ###############################################################################
                     try:
                         youtube = 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyCXE2iZJGfDhJ2s5OHjUsjA_ojtXFxV6l0&q=' + nomeFormatadoSemTraco + '+trailer+legendado&part=snippet&maxResults=8&type=video'
 
@@ -518,7 +519,7 @@ def nao_entre_em_panico():
                     except:
                         year = 0
                     votosQuantidade = int(votosQuantidade)
-                    
+                    # VERIFICA OS CRITÉRIOS E ENVIA PARA O TELEGRAM ######################################################################################
                     
                     if NotaIMDB <= '5.0' or Semcurta or (numeroCriticas < 15 and votosQuantidade < 700 and NotaIMDB <= '6.0' ) or (numeroCriticas < 10 and votosQuantidade < 700) or year == 0  or year < 2019:
                         print("Filme não passou nos critérios")
