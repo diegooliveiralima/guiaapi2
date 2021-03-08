@@ -637,9 +637,11 @@ def nao_entre_em_panico():
             print("Bot do telegram conectado!")
             chat_id = "-1001427956969"
             translator = google_translator()  
-            translate_text = translator.translate(item.title.text,lang_src='en', lang_tgt='pt') 
-            translate_text = re.sub("TIL", "Hoje eu aprendi", translate_text)
-            translate_text = re.sub("Til", "Hoje eu aprendi", translate_text)
+            TextoemIngles = item.title.text
+            TextoemIngles = re.sub("TIL", "Hoje eu aprendi", TextoemIngles)
+            TextoemIngles = re.sub("Til", "Hoje eu aprendi", TextoemIngles)
+            translate_text = translator.translate(TextoemIngles,lang_src='en', lang_tgt='pt') 
+            
             
             texto = '[' + item.title.text + '](' + link + ') \n \n' + translate_text
             
