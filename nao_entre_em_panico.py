@@ -638,8 +638,8 @@ def nao_entre_em_panico():
             chat_id = "-1001427956969"
             translator = google_translator()  
             TextoemIngles = item.title.text
-            TextoemIngles = re.sub("TIL", "Hoje eu aprendi", TextoemIngles)
-            TextoemIngles = re.sub("Til", "Hoje eu aprendi", TextoemIngles)
+            TextoemIngles = re.sub("TIL", "Today I Learned", TextoemIngles)
+            TextoemIngles = re.sub("Til", "Today I Learned", TextoemIngles)
             translate_text = translator.translate(TextoemIngles,lang_src='en', lang_tgt='pt') 
             
             
