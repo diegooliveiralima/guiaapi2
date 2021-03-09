@@ -540,13 +540,44 @@ def nao_entre_em_panico():
                         NotaIMDB = str(NotaIMDB)
                         NotaTomate = str(NotaTomate)
                         numeroCriticas = str(numeroCriticas)
+
+                        cursor = banco.cursor()
+                        cursor.execute('SELECT ciclo from controle where titulo="movies_alert_negados"')
+                        ciclo = cursor.fetchall()
+                        ciclo = ciclo[0][0]
+                        ciclo = int(ciclo)
                         
-                        TOKEN = "1335874302:AAGHfCU4hKFhp_LRQctCL3gYCtNDtntnN0Q"
-                        bot = telegram.Bot(TOKEN)
+                        _bot_token = "1335874302:AAGHfCU4hKFhp_LRQctCL3gYCtNDtntnN0Q"
+                        bot = telegram.Bot(_bot_token)
                         print("Bot do telegram conectado!")
-                        chat_id = "@negados_alert"
+                        _bot_chatID = "@negados_alert"
                         txt = '[​​​​​​​​​​​](' + imagemUrl + ')' + '*' + nomeFormatado + nomeIngles + ' ' + year + '*  \n' + 'Gênero: ' + genero + '  \n' +  'Sinopse: ' +  Sinopse   + '  \n' +  'Notas: IMDB ' + NotaIMDB + ' / RottenTomatoes ' +  NotaTomate  + '  \n' +  'Links: ' +  '[IMDB](' + linkIMDBInteiro + ')'  +  ' / '  +  '[Filmow](' + linkFilmow + ')'  + ' / ' + '[Trailer](' + linkTrailer + ')'  +  '  \n' +  'Fonte: ' + "Letterbox"
-                        bot.send_message(chat_id, txt, parse_mode='markdown')
+                        bot.send_message(_bot_chatID, txt, parse_mode='markdown')
+
+                        ciclo = ciclo + 1 
+                        ciclo = str(ciclo)
+             
+                        cursor = banco.cursor()
+                        comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo=movies_alert_negados"' 
+                        cursor.execute(comando)
+                        banco.commit() 
+
+                        
+                    try:
+                        ciclo = int(ciclo)
+                        ciclo = ciclo + 1
+                        ciclo = str(ciclo)
+                        delete_text = 'https://api.telegram.org/bot' + _bot_token + '/deleteMessage?chat_id=' + _bot_chatID + '&message_id=' + ciclo
+                        response = requests.get(delete_text)
+                        print(response)
+                        if response.status_code == 400: 
+                            print("Nao houve erro")
+                        else:
+                            print("houve erro chato")
+                            cursor = banco.cursor()
+                            comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo="unilab_noticias"' 
+                            cursor.execute(comando)
+                            banco.commit() 
                     else:
                         print("Enviando filme")
                         votosQuantidade = str(votosQuantidade)
