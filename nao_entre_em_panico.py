@@ -558,7 +558,7 @@ def nao_entre_em_panico():
                         ciclo = str(ciclo)
              
                         cursor = banco.cursor()
-                        comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo=movies_alert_negados"' 
+                        comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo="movies_alert_negados"' 
                         cursor.execute(comando)
                         banco.commit() 
 
