@@ -578,6 +578,8 @@ def nao_entre_em_panico():
                                 comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo="movies_alert_negados"' 
                                 cursor.execute(comando)
                                 banco.commit() 
+                        except:
+                            print("Não havia mensagens para excluir")
                     else:
                         print("Enviando filme")
                         votosQuantidade = str(votosQuantidade)
