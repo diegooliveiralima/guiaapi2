@@ -575,7 +575,7 @@ def nao_entre_em_panico():
                         else:
                             print("houve erro chato")
                             cursor = banco.cursor()
-                            comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo="unilab_noticias"' 
+                            comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo="movies_alert_negados"' 
                             cursor.execute(comando)
                             banco.commit() 
                     else:
