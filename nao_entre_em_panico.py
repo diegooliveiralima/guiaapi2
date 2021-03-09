@@ -168,13 +168,16 @@ def nao_entre_em_panico():
     print(ciclo)
     if ciclo  == 0:
         print("ciclo 0")
-        users = ("kurstboy","austinburke", "justmiaslife")
+        users = ("kurstboy","austinburke")
     elif ciclo == 1:
-        users = ("adrianbalboa", "max_delgado", "cervantes3")
+        users = ("adrianbalboa", "max_delgado")
         print("Ciclo 1")
     elif ciclo == 2:
         print("Ciclo 2")
         users = ("joelollo", "twillis04", "xene")
+    elif ciclo == 3:
+        print("Ciclo 3")
+        users = ( "justmiaslife",  "cervantes3")
     else:
         users = ("jslk", "swaghili123")
         ciclo = -1
