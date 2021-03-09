@@ -563,21 +563,21 @@ def nao_entre_em_panico():
                         banco.commit() 
 
                         
-                    try:
-                        ciclo = int(ciclo)
-                        ciclo = ciclo + 1
-                        ciclo = str(ciclo)
-                        delete_text = 'https://api.telegram.org/bot' + _bot_token + '/deleteMessage?chat_id=' + _bot_chatID + '&message_id=' + ciclo
-                        response = requests.get(delete_text)
-                        print(response)
-                        if response.status_code == 400: 
-                            print("Nao houve erro")
-                        else:
-                            print("houve erro chato")
-                            cursor = banco.cursor()
-                            comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo="movies_alert_negados"' 
-                            cursor.execute(comando)
-                            banco.commit() 
+                        try:
+                            ciclo = int(ciclo)
+                            ciclo = ciclo + 1
+                            ciclo = str(ciclo)
+                            delete_text = 'https://api.telegram.org/bot' + _bot_token + '/deleteMessage?chat_id=' + _bot_chatID + '&message_id=' + ciclo
+                            response = requests.get(delete_text)
+                            print(response)
+                            if response.status_code == 400: 
+                                print("Nao houve erro")
+                            else:
+                                print("houve erro chato")
+                                cursor = banco.cursor()
+                                comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo="movies_alert_negados"' 
+                                cursor.execute(comando)
+                                banco.commit() 
                     else:
                         print("Enviando filme")
                         votosQuantidade = str(votosQuantidade)
