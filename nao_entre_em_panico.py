@@ -172,7 +172,7 @@ def nao_entre_em_panico():
         print("Ciclo 1")
     elif ciclo == 2:
         print("Ciclo 2")
-        users = ("joelollo")
+        users = ("joelollo", "twillis04")
     elif ciclo == 3:
         print("Ciclo 3")
         users = ( "justmiaslife",  "cervantes3")
@@ -206,7 +206,7 @@ def nao_entre_em_panico():
             anosLetterbox = soup.findAll('td', class_='td-released center')
             f = 0
 
-            for item in range(3):
+            for item in range(2):
                 
                 titulos = titulosLetterbox[f]
                 anos = anosLetterbox[f]
