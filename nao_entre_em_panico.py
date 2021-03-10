@@ -20,8 +20,6 @@ import sys
 import urllib.request
 import PyPDF2
 import io
-
-import ebooklib
 from google_trans_new import google_translator
 import urllib3
 
@@ -559,6 +557,9 @@ def nao_entre_em_panico():
                         fonte = "Letterbox"
                         datetime.datetime.now()
                         datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
+
+                        
+                        query = re.sub('[^a-zA-Z0-9 \n\.]', '', query)
                     
         
                         hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
