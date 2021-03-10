@@ -659,19 +659,19 @@ def nao_entre_em_panico():
 
 
 
-                    pontos = 1
-                    pontos = str(pontos)
-                    fonte = "Letterbox"
-                    datetime.datetime.now()
-                    datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
+                        pontos = 1
+                        pontos = str(pontos)
+                        fonte = "Letterbox"
+                        datetime.datetime.now()
+                        datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
                     
         
-                    hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                    estado = "Alerta"
-                    cursor = banco.cursor()
-                    comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + query + "', '" + linkIMDBInteiro + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "' ,  '" + pontos  +   "')"
-                    cursor.execute(comando)
-                    banco.commit() 
+                        hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        estado = "Alerta"
+                        cursor = banco.cursor()
+                        comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + query + "', '" + linkIMDBInteiro + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "' ,  '" + pontos  +   "')"
+                        cursor.execute(comando)
+                        banco.commit() 
 
 
 
