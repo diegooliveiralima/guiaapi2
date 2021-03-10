@@ -554,6 +554,30 @@ def nao_entre_em_panico():
                         txt = '[​​​​​​​​​​​](' + imagemUrl + ')' + '*' + nomeFormatado + nomeIngles + ' ' + year + '*  \n' + 'Gênero: ' + genero + '  \n' +  'Sinopse: ' +  Sinopse   + '  \n' +  'Notas: IMDB ' + NotaIMDB + ' / RottenTomatoes ' +  NotaTomate  + '  \n' +  'Links: ' +  '[IMDB](' + linkIMDBInteiro + ')'  +  ' / '  +  '[Filmow](' + linkFilmow + ')'  + ' / ' + '[Trailer](' + linkTrailer + ')'  +  '  \n' +  'Fonte: ' + "Letterbox"
                         bot.send_message(_bot_chatID, txt, parse_mode='markdown')
 
+                        pontos = 1
+                        pontos = str(pontos)
+                        fonte = "Letterbox"
+                        datetime.datetime.now()
+                        datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
+                    
+        
+                        hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        estado = "negado"
+                        cursor = banco.cursor()
+                        comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos, numCriticas) values ('" + query + "', '" + linkIMDBInteiro + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "' ,  '" + pontos  + "' ,  '" + numeroCriticas +  "')"
+                        cursor.execute(comando)
+                        banco.commit() 
+
+
+
+
+
+
+
+
+
+
+
                         ciclo = ciclo + 1 
                         ciclo = str(ciclo)
              
@@ -642,7 +666,7 @@ def nao_entre_em_panico():
                     
         
                     hora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                    estado = "negado"
+                    estado = "Alerta"
                     cursor = banco.cursor()
                     comando = "INSERT INTO filmes (filme, fonte, hora, estado, votosQuantidade, pontos) values ('" + query + "', '" + linkIMDBInteiro + "', '" + hora + "' , '"  + estado +  "' , '" + votosQuantidade + "' ,  '" + pontos  +   "')"
                     cursor.execute(comando)
