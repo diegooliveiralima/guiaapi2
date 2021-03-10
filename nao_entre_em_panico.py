@@ -172,11 +172,14 @@ def nao_entre_em_panico():
         print("Ciclo 1")
     elif ciclo == 2:
         print("Ciclo 2")
-        users = ("joelollo", "twillis04", "xene")
+        users = ("joelollo", "twillis04")
     elif ciclo == 3:
         print("Ciclo 3")
         users = ( "justmiaslife",  "cervantes3")
-    else:
+    elif ciclo == 4:
+        print("Ciclo 4")
+        users = ( "mesh509",  "xene")
+    elif ciclo == 5:
         users = ("jslk", "swaghili123")
         ciclo = -1
         print("Ultimo ciclo")
