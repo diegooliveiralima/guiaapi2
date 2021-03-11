@@ -166,6 +166,13 @@ def nao_entre_em_panico():
     print(ciclo)
     if ciclo  == -1:
         print("ciclo -1")
+        ciclo = ciclo + 1
+        ciclo = str(ciclo)
+        letterbox = "letterbox"
+        cursor = banco.cursor()
+        comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo="letterbox"' 
+        cursor.execute(comando)
+        banco.commit() 
         return jsonify({"message": "Não entre em pânico!"})
     elif ciclo == 0:
         users = ("kurstboy","austinburke")
