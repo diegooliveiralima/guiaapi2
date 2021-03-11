@@ -164,9 +164,12 @@ def nao_entre_em_panico():
     ciclo = ciclo[0][0]
     ciclo = int(ciclo)
     print(ciclo)
-    if ciclo  == 0:
-        print("ciclo 0")
+    if ciclo  == -1:
+        print("ciclo -1")
+        return jsonify({"message": "Não entre em pânico!"})
+    elif ciclo == 0:
         users = ("kurstboy","austinburke")
+        print("Ciclo 0")
     elif ciclo == 1:
         users = ("adrianbalboa", "max_delgado")
         print("Ciclo 1")
@@ -181,7 +184,7 @@ def nao_entre_em_panico():
         users = ( "mesh509",  "xene")
     elif ciclo == 5:
         users = ("jslk", "swaghili123")
-        ciclo = -1
+        ciclo = -2
         print("Ultimo ciclo")
         
     ciclo = ciclo + 1
