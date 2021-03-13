@@ -610,14 +610,32 @@ def nao_entre_em_panico():
                             print(response)
                             if response.status_code == 400: 
                                 print("Nao houve erro")
+                                sleep(4)
+                                print(ciclo)
+                                delete_text = 'https://api.telegram.org/bot' + _bot_token + '/deleteMessage?chat_id=' + _bot_chatID + '&message_id=' + ciclo
+                                response = requests.get(delete_text)
+                                print(response)
+                                if response.status_code == 400: 
+                                    print("Nao houve erro de novo!!")
+                                else:
+                                    print("houve erro chato na segunda tentativa")
+                                    cursor = banco.cursor()
+                                    comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo="movies_alert_negados"' 
+                                    cursor.execute(comando)
+                                    banco.commit() 
                             else:
                                 print("houve erro chato")
                                 cursor = banco.cursor()
                                 comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo="movies_alert_negados"' 
                                 cursor.execute(comando)
                                 banco.commit() 
+                    
+             
+                    
+
+
                         except:
-                            print("Não havia mensagens para excluir")
+                             print("Não havia mensagens para excluir")
                     else:
                         print("Enviando filme")
                         votosQuantidade = str(votosQuantidade)
@@ -648,22 +666,40 @@ def nao_entre_em_panico():
                         banco.commit() 
 
                         try:
-                           ciclo = int(ciclo)
-                           ciclo = ciclo + 1
-                           ciclo = str(ciclo)
-                           delete_text = 'https://api.telegram.org/bot' + _bot_token + '/deleteMessage?chat_id=' + _bot_chatID + '&message_id=' + ciclo
-                           response = requests.get(delete_text)
-                           print(response)
-                           if response.status_code == 400: 
-                               print("Nao houve erro")
-                           else:
-                               print("houve erro chato")
-                               cursor = banco.cursor()
-                               comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo="movies_alert"' 
-                               cursor.execute(comando)
-                               banco.commit() 
+                            ciclo = int(ciclo)
+                            ciclo = ciclo + 1
+                            ciclo = str(ciclo)
+                            delete_text = 'https://api.telegram.org/bot' + _bot_token + '/deleteMessage?chat_id=' + _bot_chatID + '&message_id=' + ciclo
+                            response = requests.get(delete_text)
+                            print(response)
+                            if response.status_code == 400: 
+                                print("Nao houve erro")
+                                sleep(4)
+                                print(ciclo)
+                                delete_text = 'https://api.telegram.org/bot' + _bot_token + '/deleteMessage?chat_id=' + _bot_chatID + '&message_id=' + ciclo
+                                response = requests.get(delete_text)
+                                print(response)
+                                if response.status_code == 400: 
+                                    print("Nao houve erro de novo!!")
+                                else:
+                                    print("houve erro chato na segunda tentativa")
+                                    cursor = banco.cursor()
+                                    comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo="movies_alert"' 
+                                    cursor.execute(comando)
+                                    banco.commit() 
+                            else:
+                                print("houve erro chato")
+                                cursor = banco.cursor()
+                                comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo="movies_alert"' 
+                                cursor.execute(comando)
+                                banco.commit() 
+                    
+             
+                    
+
+
                         except:
-                           print("Não havia mensagens para excluir")
+                             print("Não havia mensagens para excluir")
 
 
 
