@@ -193,6 +193,9 @@ def nao_entre_em_panico():
         print("Ciclo 5")
         users = ( "designergaze",  "petergavaris")
     elif ciclo == 6:
+        print("Ciclo 6")
+        users = ( "siegel",  "bratpitt")
+    elif ciclo == 7:
         users = ("jslk", "swaghili123")
         ciclo = -2
         print("Ultimo ciclo")
