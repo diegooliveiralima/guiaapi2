@@ -616,7 +616,7 @@ def nao_entre_em_panico():
                             print(response)
                             if response.status_code == 400: 
                                 print("Nao houve erro")
-                                sleep(4)
+                                sleep(6)
                                 print(ciclo)
                                 delete_text = 'https://api.telegram.org/bot' + _bot_token + '/deleteMessage?chat_id=' + _bot_chatID + '&message_id=' + ciclo
                                 response = requests.get(delete_text)
@@ -680,7 +680,7 @@ def nao_entre_em_panico():
                             print(response)
                             if response.status_code == 400: 
                                 print("Nao houve erro")
-                                sleep(4)
+                                sleep(6)
                                 print(ciclo)
                                 delete_text = 'https://api.telegram.org/bot' + _bot_token + '/deleteMessage?chat_id=' + _bot_chatID + '&message_id=' + ciclo
                                 response = requests.get(delete_text)
