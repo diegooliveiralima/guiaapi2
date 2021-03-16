@@ -190,15 +190,25 @@ def nao_entre_em_panico():
         print("Ciclo 4")
         users = ( "mesh509",  "xene")
     elif ciclo == 5:
-        print("Ciclo 5")
-        users = ( "designergaze",  "petergavaris")
+        print("ciclo -5 - #########")
+        ciclo = ciclo + 1
+        ciclo = str(ciclo)
+        letterbox = "letterbox"
+        cursor = banco.cursor()
+        comando = 'UPDATE controle  SET ciclo="' + ciclo + '" where titulo="letterbox"' 
+        cursor.execute(comando)
+        banco.commit() 
+        return jsonify({"message": "Não entre em pânico!"})
     elif ciclo == 6:
         print("Ciclo 6")
-        users = ( "siegel",  "bratpitt")
+        users = ( "designergaze",  "petergavaris")
     elif ciclo == 7:
         print("Ciclo 7")
-        users = ( "punq",  "loaft_king")
+        users = ( "siegel",  "bratpitt")
     elif ciclo == 8:
+        print("Ciclo 8")
+        users = ( "punq",  "loaft_king")
+    elif ciclo == 9:
         users = ("jslk", "swaghili123")
         ciclo = -2
         print("Ultimo ciclo")
